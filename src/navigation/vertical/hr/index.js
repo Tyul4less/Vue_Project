@@ -1,7 +1,7 @@
 export default [
   {
-    title: 'insaHome',
-    route: 'insaHome',
+    title: 'hrHome',
+    route: 'hrHome',
     icon: 'HomeIcon',
   },
   {

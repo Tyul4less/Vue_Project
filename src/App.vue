@@ -13,7 +13,7 @@
 
 <script>
 
-// This will  be populated in `beforeCreate` hook
+// This will be populated in `beforeCreate` hook
 import { $themeColors, $themeBreakpoints, $themeConfig } from '@themeConfig'
 import { provideToast } from 'vue-toastification/composition'
 import { watch } from '@vue/composition-api'
