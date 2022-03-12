@@ -75,18 +75,22 @@
         :items="ERPMenu"
         class="navigation navigation-main"
       />
+      <b-dropdown-divider />
     </vue-perfect-scrollbar>
     <!-- /main menu content-->
   </div>
 </template>
 
 <script>
+import {
+  BNavItemDropdown, BDropdownItem, BDropdownDivider, BAvatar,
+  BLink, BImg,
+} from 'bootstrap-vue'
 import navMenuItems from '@/navigation/vertical'
 import hr from '@/navigation/vertical/hr'
 import account from '@/navigation/vertical/account'
 import logi from '@/navigation/vertical/logi'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import { BLink, BImg } from 'bootstrap-vue'
 import { provide, computed, ref } from '@vue/composition-api'
 import useAppConfig from '@core/app-config/useAppConfig'
 import { $themeConfig } from '@themeConfig'
@@ -129,6 +133,10 @@ export default {
     VerticalNavMenuItems,
     BLink,
     BImg,
+    BNavItemDropdown,
+    BDropdownItem,
+    BDropdownDivider,
+    BAvatar,
   },
   props: {
     isVerticalMenuActive: {
