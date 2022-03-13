@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import baseRoute from './hr/BaseRoute'
 import logiRouter from './logi/BaseRoute'
 import accountRouter from './account/BaseRoute'
+import salesRoute from '@/router/logi/SalesRoute'
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,7 @@ const router = new VueRouter({
     ...baseRoute,
     ...accountRouter,
     ...logiRouter,
+    ...salesRoute,
     {
       path: '/',
       name: 'home',
