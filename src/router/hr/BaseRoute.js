@@ -15,8 +15,25 @@ const insaRouter = [
     },
   },
   {
-    path: '/hr-page',
-    name: 'insa-page',
+    path: `${ERP}/emp-page`,
+    name: 'emp-page',
+    component: () => import('@/views/hr/affair/page/EmpDetailed/SimpleEmpSearch/EmpListGrid.vue'),
+    meta: {
+      pageTitle: '직원정보 관리',
+      breadcrumb: [
+        {
+          text: '인사관리',
+        },
+        {
+          text: '직원정보 관리',
+          active: true,
+        },
+      ],
+    },
+  },
+  {
+    path: '/hr-info',
+    name: 'hr-info',
     component: () => import('@/views/SecondPage.vue'),
     meta: {
       pageTitle: 'Second Page',
