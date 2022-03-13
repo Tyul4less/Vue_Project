@@ -1,7 +1,12 @@
 import dashboard from '@/navigation/vertical/common/dashboard'
-import BaseLinks from '@/navigation/vertical/logi/workMenu'
+import salesMenu from '@/navigation/vertical/logi/salesMenu'
 
 export default [
   ...dashboard,
-  ...BaseLinks,
+  {
+    title: '메인페이지',
+    route: 'logiHome',
+    icon: 'BoxIcon',
+  },
+  ...salesMenu,
 ]
