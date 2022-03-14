@@ -5,7 +5,7 @@
     style="font-family: '카페24 써라운드'; font-size: large; cursor: pointer"
     @click="nextPage"
   >
-    <box-icon
+    <truck-icon
       size="1.1x"
       class="custom-class"
     />
@@ -17,7 +17,7 @@
 import {
   BNavItemDropdown, BDropdownItem, BDropdownDivider, BAvatar,
 } from 'bootstrap-vue'
-import { CreditCardIcon, BoxIcon, UserIcon } from 'vue-feather-icons'
+import { CreditCardIcon, TruckIcon, UserIcon } from 'vue-feather-icons'
 import { mapState } from 'vuex'
 
 export default {
@@ -31,7 +31,7 @@ export default {
     BAvatar,
     CreditCardIcon,
     UserIcon,
-    BoxIcon,
+    TruckIcon,
   },
   methods: {
     nextPage() {

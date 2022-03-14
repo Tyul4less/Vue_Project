@@ -72,6 +72,7 @@
       @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
     >
       <vertical-nav-menu-items
+              style="font-family: '배달의민족 도현'"
         :items="ERPMenu"
         class="navigation navigation-main"
       />
