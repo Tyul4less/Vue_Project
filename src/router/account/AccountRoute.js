@@ -10,6 +10,12 @@ const AccountRoute = [
     name: 'addSlipForm',
     component: () => import('@/views/account/account/SlipAddFormPage.vue'),
   },
+  {
+    path: ' /acc/account/journalForm',
+    name: 'journalForm',
+    props: true, // true로 설정하면 데이터를 props로도 받습니다.
+    component: () => import('@/views/account/account/JournalFormPage.vue'),
+  },
 
 ]
 

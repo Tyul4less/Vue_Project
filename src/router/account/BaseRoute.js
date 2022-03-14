@@ -1,5 +1,9 @@
+import AccountRoute from './AccountRoute'
+
 const ERP = '/account'
 const accountRouter = [
+  ...AccountRoute,
+
   {
     path: `${ERP}/home`,
     name: 'accountHome',
