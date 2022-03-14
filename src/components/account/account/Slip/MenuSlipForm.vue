@@ -7,8 +7,17 @@
         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
         v-b-modal.openAddSlipModal
         variant="primary"
+        :disabled="addBtStatus"
       >
         전표추가
+      </b-button>
+      <b-button
+        v-if="activeButton==='addSlip'"
+        v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+        v-b-modal.openAddJounalModal
+        variant="primary"
+      >
+        분개추가
       </b-button>
       <b-button
         v-show="activeButton==='searchSlip'"
@@ -34,6 +43,7 @@
       >
         전표수정
       </b-button>
+
     </b-button-group>
   </b-button-toolbar>
 </template>
@@ -54,7 +64,7 @@ export default {
   directives: {
     Ripple,
   },
-  props: ['activeButton'],
+  props: ['activeButton', 'addBtStatus'],
 
   methods: {
 
