@@ -1,29 +1,33 @@
-import React from "react";
-import { Typography } from "@material-ui/core";
-import JournalFormGrid from "./JournalForm/JournalFormGrid";
-import JournalFormMenu from "./JournalForm/JournalFormMenu";
-import * as types from "../../reducer/AccountReducer";
-import { useDispatch,useSelector } from "react-redux";
-const JournalForm = () => {
-  const dispatch = useDispatch();
-  const journalDoubleList = useSelector(({ AccReducer }) => AccReducer.AccountReducer.journalDoubleList);
-  const { isLoading } = useSelector(state => state.AccReducer);
-  const searchDataJournalDoubleStart= ({startDate,endDate})=>{
+<template>
+  <div>
+    <JournalForm />
+  </div>
+</template>
 
-  console.log(`JournalFormMenu ==> JournalFormMenu ===> 분개장 조회(searchJournalDoubleStart)액션`)
-  dispatch(types.searchJournalDoubleStart({startDate,endDate}));
+<script>
+import JournalForm from '@/components/account/account/Journal/JournalForm.vue'
 
+export default {
+  components: {
+    JournalForm,
+  },
+  props: {
+    selectedSlip: {
+      type: String,
+      required: true,
+    },
+  },
+  created() {
+    this.fetchSlipData()
+  },
+  methods: {
+    async  fetchSlipData() {
+      await this.$store.dispatch('account/account/FETCH_SLIP', this.selectedSlip)
+    },
+  },
 }
+</script>
 
-  return (
-    <>
-      <Typography variant="h3" gutterBottom>
-        분개장
-      </Typography>
-      <JournalFormMenu searchDataJournalDoubleStart={searchDataJournalDoubleStart} />
-      <JournalFormGrid journalDoubleList={journalDoubleList} isLoading={isLoading} />
-    </>
-  );
-};
+<style>
 
-export default JournalForm;
+</style>

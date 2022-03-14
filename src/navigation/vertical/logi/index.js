@@ -1,4 +1,5 @@
 import dashboard from '@/navigation/vertical/common/dashboard'
+
 import salesMenu from '@/navigation/vertical/logi/salesMenu'
 import logisticsinfo from '@/navigation/vertical/logi/logisicsInfo'
 import material from '@/navigation/vertical/logi/material'
