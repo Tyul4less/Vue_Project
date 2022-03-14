@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+    </div>
+      <b-table striped hover :items="items"></b-table>
     <b-card title="HOW 직원정보 관리 ❓">
       <b-card-text>직원 데이터를 누르면 하단에 상세정보를 볼 수 있다.</b-card-text>
       <b-card-text>더블클릭시 수정을 할 수 있게 할거임 권한 그런거 일단 제껴두고 자세한건
@@ -73,6 +76,12 @@ export default {
         {id: 4, name: "Chris", age: 55, createdAt: '2011-10-11', score: 0.03343},
         {id: 5, name: "Dan", age: 40, createdAt: '2011-10-21', score: 0.03343},
         {id: 6, name: "John", age: 20, createdAt: '2011-10-31', score: 0.03343},
+      ],
+      items: [
+        { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+        { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+        { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+        { age: 38, first_name: 'Jami', last_name: 'Carney' }
       ],
     };
   }
