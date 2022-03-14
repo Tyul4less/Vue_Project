@@ -1,12 +1,7 @@
+import dashboard from '@/navigation/vertical/common/dashboard'
+import BaseLinks from '@/navigation/vertical/logi/workMenu'
+
 export default [
-    {
-        title: 'logiHome',
-        route: 'logiHome',
-        icon: 'HomeIcon',
-    },
-    {
-        title: 'logi-page',
-        route: 'logi-page',
-        icon: 'FileIcon',
-    },
+  ...dashboard,
+  ...BaseLinks,
 ]

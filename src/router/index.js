@@ -21,26 +21,12 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/Home.vue'),
+      component: () => import('@/views/hr/Home.vue'),
       meta: {
         pageTitle: 'Home',
         breadcrumb: [
           {
             text: 'Home',
-            active: true,
-          },
-        ],
-      },
-    },
-    {
-      path: '/second-page',
-      name: 'second-page',
-      component: () => import('@/views/SecondPage.vue'),
-      meta: {
-        pageTitle: 'Second Page',
-        breadcrumb: [
-          {
-            text: 'Second Page',
             active: true,
           },
         ],
