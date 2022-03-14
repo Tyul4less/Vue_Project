@@ -19,41 +19,18 @@
       <b-button
         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
         variant="primary"
+        @click="$emit('editItem')"
       >
-        전표저장
+        전표수정
       </b-button>
     </b-button-group>
-    <b-dropdown
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      class="mx-1"
-      right
-      text="menu"
-      variant="primary"
-    >
-      <b-dropdown-item>전표</b-dropdown-item>
-      <b-dropdown-item>분개</b-dropdown-item>
-      <b-dropdown-item>분개상세</b-dropdown-item>
-    </b-dropdown>
-    <b-button-group>
-      <b-button
-        v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-        variant="primary"
-      >
-        승인
-      </b-button>
-      <b-button
-        v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-        variant="primary"
-      >
-        취소
-      </b-button>
-    </b-button-group>
+
   </b-button-toolbar>
 </template>
 
 <script>
 import {
-  BButtonToolbar, BButtonGroup, BButton, BDropdown, BDropdownItem,
+  BButtonToolbar, BButtonGroup, BButton,
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 
@@ -62,15 +39,15 @@ export default {
     BButtonToolbar,
     BButtonGroup,
     BButton,
-    BDropdown,
-    BDropdownItem,
+
   },
   directives: {
     Ripple,
   },
+
   methods: {
     addSlim() {
-      this.$router.push('/acc/account/addSlipForm')
+      this.$router.push({ name: 'addSlipForm' })
     },
 
   },
