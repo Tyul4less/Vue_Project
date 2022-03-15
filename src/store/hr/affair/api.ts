@@ -4,11 +4,11 @@ import './action';
 
 Vue.use(Vuex);
 
-interface State {
+interface Api {
     hrEmpList : Array<Object>;
 }
 
-const store: StoreOptions<State> = {
+const store: StoreOptions<Api> = {
     state : {
         hrEmpList : []
     }

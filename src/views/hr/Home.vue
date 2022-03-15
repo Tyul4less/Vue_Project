@@ -26,6 +26,9 @@
             BCardText,
             BLink,
         },
+      beforeCreate() {
+
+      }
     }
 </script>
 

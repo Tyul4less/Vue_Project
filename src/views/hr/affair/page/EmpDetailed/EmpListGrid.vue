@@ -1,15 +1,21 @@
 <template>
   <div>
-    <b-card title="HOW 직원정보 관리 ❓">
-      <b-card-text>직원 데이터를 누르면 하단에 상세정보를 볼 수 있다.</b-card-text>
-      <b-card-text>더블클릭시 수정을 할 수 있게 할거임 권한 그런거 일단 제껴두고 자세한건
-        <b-link href="https://www.google.com/" target="_blank">구글</b-link>에 문의하세요 .
+    <b-card title="HOW 직원정보 관리 ❓" v-if="hideHow!==false">
+      <b-card-text>직원 데이터를 누르면 상세정보를 볼 수 있게하자.</b-card-text>
+      <div>
+
+        <b-card-text>자세한건
+          <b-link href="https://www.google.com/" target="_blank">구글</b-link>
+          에게 문의하세요.
+        </b-card-text>
         <b-button
+            size="sm"
+            @click="hideHow=false"
             v-ripple.400="'rgba(234, 84, 85, 0.15)'"
             variant="outline-danger">
           닫기
         </b-button>
-      </b-card-text>
+      </div>
     </b-card>
     <b-row>
       <b-col
@@ -119,15 +125,15 @@
             :filter-included-fields="filterOn"
             @filtered="onFiltered"
         >
-          <template #cell(avatar)="data">
-            <b-avatar :src="data.value" />
-          </template>
+          <!--          <template #cell(avatar)="data">
+                      <b-avatar :src="data.value" />
+                    </template>
 
-          <template #cell(status)="data">
-            <b-badge :variant="status[1][data.value]">
-              {{ status[0][data.value] }}
-            </b-badge>
-          </template>
+                    <template #cell(status)="data">
+                      <b-badge :variant="status[1][data.value]">
+                        {{ status[0][data.value] }}
+                      </b-badge>
+                    </template>-->
         </b-table>
       </b-col>
 
@@ -145,14 +151,31 @@
       </b-col>
     </b-row>
 
-<!--    <b-table striped hover :items="items"></b-table>-->
+    <!--    <b-table striped hover :items="items"></b-table>-->
   </div>
 </template>
 
 <script>
 import {
-  BTable, BAvatar, BBadge, BRow, BCol, BFormGroup, BFormSelect, BPagination, BInputGroup, BFormInput, BInputGroupAppend, BButton,
-BCard} from 'bootstrap-vue'
+  BTable,
+  BAvatar,
+  BBadge,
+  BRow,
+  BCol,
+  BFormGroup,
+  BFormSelect,
+  BPagination,
+  BInputGroup,
+  BFormInput,
+  BInputGroupAppend,
+  BButton,
+  BCard,
+  BLink,
+  BCardText
+} from 'bootstrap-vue'
+import AFFAIR from '@/store/hr/affair/action.js'
+import {state} from '@/store/hr/affair/state.js'
+import {mapState} from "vuex";
 
 export default {
   components: {
@@ -169,221 +192,85 @@ export default {
     BInputGroupAppend,
     BButton,
     BCard,
+    BLink,
+    BCardText,
   },
 
   // and in data
   data() {
     return {
-        perPage: 5,
-        pageOptions: [3, 5, 10],
-        totalRows: 1,
-        currentPage: 1,
-        sortBy: '',
-        sortDesc: false,
-        sortDirection: 'asc',
-        filter: null,
-        filterOn: [],
-        infoModal: {
-          id: 'info-modal',
-          title: '',
-          content: '',
+      hideHow: true,
+      perPage: 5,
+      pageOptions: [3, 5, 10],
+      totalRows: 0,
+      currentPage: 1,
+      sortBy: '',
+      sortDesc: false,
+      sortDirection: 'asc',
+      filter: null,
+      filterOn: [],
+      infoModal: {
+        id: 'info-modal',
+        title: '',
+        content: '',
+      },
+      fields: [
+        {
+          key: 'empCode', label: 'NO',
         },
-        fields: [
-          {
-            key: 'id', label: 'Id',
-          },
-          {
-            key: 'avatar', label: 'Avatar',
-          },
-          {key: 'full_name', label: 'Full Name', sortable: true},
-          {key: 'post', label: 'Post', sortable: true},
-          'email',
-          'city',
-          'start_date',
-          'salary',
-          'age',
-          'experience',
-          {key: 'status', label: 'Status', sortable: true},
-        ],
-        items: [
-          {
-            id: 1,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/10-small.png'),
-            full_name: "Korrie O'Crevy",
-            post: 'Nuclear Power Engineer',
-            email: 'kocrevy0@thetimes.co.uk',
-            city: 'Krasnosilka',
-            start_date: '09/23/2016',
-            salary: '$23896.35',
-            age: '61',
-            experience: '1 Year',
-            status: 2,
-          },
-          {
-            id: 2,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/1-small.png'),
-            full_name: 'Bailie Coulman',
-            post: 'VP Quality Control',
-            email: 'bcoulman1@yolasite.com',
-            city: 'Hinigaran',
-            start_date: '05/20/2018',
-            salary: '$13633.69',
-            age: '63',
-            experience: '3 Years',
-            status: 2,
-          },
-          {
-            id: 3,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/9-small.png'),
-            full_name: 'Stella Ganderton',
-            post: 'Operator',
-            email: 'sganderton2@tuttocitta.it',
-            city: 'Golcowa',
-            start_date: '03/24/2018',
-            salary: '$13076.28',
-            age: '66',
-            experience: '6 Years',
-            status: 5,
-          },
-          {
-            id: 4,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/3-small.png'),
-            full_name: 'Dorolice Crossman',
-            post: 'Cost Accountant',
-            email: 'dcrossman3@google.co.jp',
-            city: 'Paquera',
-            start_date: '12/03/2017',
-            salary: '$12336.17',
-            age: '22',
-            experience: '2 Years',
-            status: 2,
-          },
-          {
-            id: 5,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/4-small.png'),
-            full_name: 'Harmonia Nisius',
-            post: 'Senior Cost Accountant',
-            email: 'hnisius4@gnu.org',
-            city: 'Lucan',
-            start_date: '08/25/2017',
-            salary: '$10909.52',
-            age: '33',
-            experience: '3 Years',
-            status: 2,
-          },
-          {
-            id: 6,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/5-small.png'),
-            full_name: 'Genevra Honeywood',
-            post: 'Geologist',
-            email: 'ghoneywood5@narod.ru',
-            city: 'Maofan',
-            start_date: '06/01/2017',
-            salary: '$17803.80',
-            age: '61',
-            experience: '1 Year',
-            status: 1,
-          },
-          {
-            id: 7,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/7-small.png'),
-            full_name: 'Eileen Diehn',
-            post: 'Environmental Specialist',
-            email: 'ediehn6@163.com',
-            city: 'Lampuyang',
-            start_date: '10/15/2017',
-            salary: '$18991.67',
-            age: '59',
-            experience: '9 Years',
-            status: 3,
-          },
-          {
-            id: 8,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/9-small.png'),
-            full_name: 'Richardo Aldren',
-            post: 'Senior Sales Associate',
-            email: 'raldren7@mtv.com',
-            city: 'Skoghall',
-            start_date: '11/05/2016',
-            salary: '$19230.13',
-            age: '55',
-            experience: '5 Years',
-            status: 3,
-          },
-          {
-            id: 9,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/2-small.png'),
-            full_name: 'Allyson Moakler',
-            post: 'Safety Technician',
-            email: 'amoakler8@shareasale.com',
-            city: 'Mogilany',
-            start_date: '12/29/2018',
-            salary: '$11677.32',
-            age: '39',
-            experience: '9 Years',
-            status: 5,
-          },
-          {
-            id: 10,
-            // eslint-disable-next-line global-require
-            avatar: require('@/assets/images/avatars/6-small.png'),
-            full_name: 'Merline Penhalewick',
-            post: 'Junior Executive',
-            email: 'mpenhalewick9@php.net',
-            city: 'Kanuma',
-            start_date: '04/19/2019',
-            salary: '$15939.52',
-            age: '23',
-            experience: '3 Years',
-            status: 2,
-          },
-        ],
-        status: [{
-          1: 'Current', 2: 'Professional', 3: 'Rejected', 4: 'Resigned', 5: 'Applied',
+        {
+          key: 'avatar', label: '사진',
         },
-          {
-            1: 'light-primary', 2: 'light-success', 3: 'light-danger', 4: 'light-warning', 5: 'light-info',
-          }],
-      }
+        {key: 'empName', label: '이름', sortable: true},
+        {key: 'address', label: '주소', sortable: true},
+        {key: 'email', label: '이메일', sortable: true},
+        {key: 'birthDate', label: '생일', sortable: true},
+        {key: 'detailCodeName', label: '부서', sortable: true},
+        {key: 'gender', label: '성별', sortable: true},
+        {key: 'position', label: '직책'},
+      ],
+      items: [],
+    }
+  },
+  computed: {
+    ...mapState('hr/affair', ['allEmpList']),
+    sortOptions() {
+      // Create an options list from our fields
+      return this.fields
+          .filter(f => f.sortable)
+          .map(f => ({text: f.label, value: f.key}))
     },
-        computed: {
-      sortOptions() {
-        // Create an options list from our fields
-        return this.fields
-            .filter(f => f.sortable)
-            .map(f => ({ text: f.label, value: f.key }))
-      },
+  },
+  beforeCreate() {
+    AFFAIR.GET_ALL_EMP_LIST();
+    this.items = state.allEmpList.empList;
+    console.log("mounted");
+    console.log(state.allEmpList.empList);
+  },
+  mounted() {
+    const timeout = setTimeout(() => {
+      console.log("beforeUpdate")
+      this.items = state.allEmpList.empList;
+      this.totalRows = state.allEmpList.empList.length;
+    }, 2000)
+  },
+  methods: {
+    info(item, index, button) {
+      this.infoModal.title = `Row index: ${index}`
+      this.infoModal.content = JSON.stringify(item, null, 2)
+      this.$root.$emit('bv::show::modal', this.infoModal.id, button)
     },
-    mounted() {
-      // Set the initial number of items
-      this.totalRows = this.items.length
+    resetInfoModal() {
+      this.infoModal.title = ''
+      this.infoModal.content = ''
     },
-    methods: {
-      info(item, index, button) {
-        this.infoModal.title = `Row index: ${index}`
-        this.infoModal.content = JSON.stringify(item, null, 2)
-        this.$root.$emit('bv::show::modal', this.infoModal.id, button)
-      },
-      resetInfoModal() {
-        this.infoModal.title = ''
-        this.infoModal.content = ''
-      },
-      onFiltered(filteredItems) {
-        // Trigger pagination to update the number of buttons/pages due to filtering
-        this.totalRows = filteredItems.length
-        this.currentPage = 1
-      },
-      }
+    onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
+    },
   }
+}
 
 </script>
 
