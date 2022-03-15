@@ -13,4 +13,8 @@ function searchContractDetailInMpsAvailable(payload) {
   })
 }
 
-export { searchContractDetailInMpsAvailable }
+function convertContractDetailToMps(payload) {
+  return logiApi.post('/production/convertContractDetailToMps', payload)
+}
+
+export { searchContractDetailInMpsAvailable, convertContractDetailToMps }

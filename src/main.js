@@ -20,6 +20,7 @@ import { formatDate } from './utils/filters'
 // BSV Plugin Registration
 Vue.use(ToastPlugin)
 Vue.use(ModalPlugin)
+Vue.component('AlertDialog', () => import('@/components/common/AlertDialog.vue'))
 
 // Composition API
 Vue.use(VueCompositionAPI)
