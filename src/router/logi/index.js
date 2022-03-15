@@ -1,3 +1,5 @@
+import salesRoute from './SalesRoute'
+
 const ERP = '/logi'
 const logiRouter = [
     {
@@ -14,19 +16,6 @@ const logiRouter = [
             ],
         },
     },
-    {
-        path: '/logi-page',
-        name: 'logi-page',
-        component: () => import('@/views/logistic/sales/salesTest'),
-        meta: {
-            pageTitle: 'Second Page',
-            breadcrumb: [
-                {
-                    text: 'Second Page',
-                    active: true,
-                },
-            ],
-        },
-    },
+    ...salesRoute,
 ]
 export default logiRouter

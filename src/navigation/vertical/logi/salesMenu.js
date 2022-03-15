@@ -1,7 +1,7 @@
 export default [
     {
         title: '영업 관리',
-        icon: 'FileIcon',
+        icon: 'TrendingUpIcon',
         children: [
             {
                 title: '견적 관리',
@@ -21,21 +21,24 @@ export default [
                 children: [
                     {
                         title: '수주 조회',
-                        route: 'logi-page',
+                        route: 'contractInfo',
                     },
                     {
                         title: '수주 등록',
-                        route: 'logi-page',
+                        route: 'registContract',
                     },
                 ],
             },
             {
-                title: '수주 조회',
+                title: '납품 관리',
+                route: 'deliveryInfoPage',
+            },
+            {
+                title: '판매 계획',
                 route: 'dashboard-analytics',
             },
             {
-                title: '수주 등록',
-                route: 'dashboard-analytics',
+                title: '외주관리',
             },
         ],
     },

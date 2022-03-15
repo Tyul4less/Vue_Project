@@ -19,6 +19,18 @@
           <!-- Item Name -->
           <b-col md="2">
             <b-form-group
+              label="기수"
+              label-for="accountPeriodNo"
+            >
+              <b-form-input
+                id="accountPeriodNo"
+                type="number"
+                placeholder="32"
+              />
+            </b-form-group>
+          </b-col>
+          <b-col md="2">
+            <b-form-group
               label="전표일련번호"
               label-for="slipNo"
             >
@@ -31,27 +43,15 @@
           </b-col>
 
           <!-- Cost -->
-          <b-col md="2">
-            <b-form-group
-              label="Cost"
-              label-for="cost"
-            >
-              <b-form-input
-                id="cost"
-                type="number"
-                placeholder="32"
-              />
-            </b-form-group>
-          </b-col>
 
           <!-- Quantity -->
           <b-col md="2">
             <b-form-group
-              label="Quantity"
-              label-for="quantity"
+              label="전표유형"
+              label-for="slipType"
             >
               <b-form-input
-                id="quantity"
+                id="slipType"
                 type="number"
                 placeholder="1"
               />
@@ -59,14 +59,28 @@
           </b-col>
 
           <!-- Profession -->
+
+          <!-- Profession -->
           <b-col md="2">
             <b-form-group
-              label="Quantity"
-              label-for="quantity"
+              label="작성자"
+              label-for="reportingEmpName"
             >
               <b-form-input
-                id="quantity"
-                type="number"
+                id="reportingEmpName"
+                type="text"
+                placeholder="1"
+              />
+            </b-form-group>
+          </b-col>
+          <b-col md="2">
+            <b-form-group
+              label="신청날짜"
+              label-for="reportingDate"
+            >
+              <b-form-input
+                id="reportingDate"
+                type="date"
                 placeholder="1"
               />
             </b-form-group>
@@ -74,26 +88,13 @@
           <!-- Profession -->
           <b-col md="2">
             <b-form-group
-              label="Quantity"
-              label-for="quantity"
+              label="결제상태"
+              label-for="slipStatus"
             >
               <b-form-input
-                id="quantity"
-                type="number"
-                placeholder="1"
-              />
-            </b-form-group>
-          </b-col>
-          <!-- Profession -->
-          <b-col md="2">
-            <b-form-group
-              label="Quantity"
-              label-for="quantity"
-            >
-              <b-form-input
-                id="quantity"
-                type="number"
-                placeholder="1"
+                id="slipStatus"
+                type="text"
+                placeholder="미결"
               />
             </b-form-group>
           </b-col>

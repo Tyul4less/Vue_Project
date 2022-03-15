@@ -5,15 +5,14 @@ import setInterceptors from '@/api/common/interceptors'
 // 기본
 function createInstance() {
   return axios.create({
-    baseURL: 'http://localhost:53104',
+    baseURL: 'http://localhost:8282 ',
   })
 }
 
 // 각각의 모듈에따라 정리한  axios
 function createInstanceWithAuth(url) {
-  console.log('api ')
   const instance = axios.create({
-    baseURL: `http://localhost:53104${url}`,
+    baseURL: `http://localhost:8282${url}`,
   })
   return setInterceptors(instance) // 인터셉터가 셋업된 인스턴스
 }
