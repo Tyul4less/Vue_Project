@@ -1,213 +1,129 @@
 <template>
   <div>
     <div>
-      <b-form
-        ref="form"
-        :style="{height: trHeight}"
-        class="repeater-form"
-        @submit.prevent="repeateAgain"
-      >
-
-        <!-- Row Loop -->
-        <b-row
-          v-for="(item, index) in items"
-          :id="item.id"
-          :key="item.id"
-          ref="row"
-        >
-
-          <!-- Item Name -->
-          <b-col md="2">
-            <b-form-group
-              label="기수"
-              label-for="accountPeriodNo"
-            >
-              <b-form-input
-                id="accountPeriodNo"
-                type="number"
-                placeholder="32"
-              />
-            </b-form-group>
-          </b-col>
-          <b-col md="2">
-            <b-form-group
-              label="전표일련번호"
-              label-for="slipNo"
-            >
-              <b-form-input
-                id="slipNo"
-                type="text"
-                placeholder="NEW"
-              />
-            </b-form-group>
-          </b-col>
-
-          <!-- Cost -->
-
-          <!-- Quantity -->
-          <b-col md="2">
-            <b-form-group
-              label="전표유형"
-              label-for="slipType"
-            >
-              <b-form-input
-                id="slipType"
-                type="number"
-                placeholder="1"
-              />
-            </b-form-group>
-          </b-col>
-
-          <!-- Profession -->
-
-          <!-- Profession -->
-          <b-col md="2">
-            <b-form-group
-              label="작성자"
-              label-for="reportingEmpName"
-            >
-              <b-form-input
-                id="reportingEmpName"
-                type="text"
-                placeholder="1"
-              />
-            </b-form-group>
-          </b-col>
-          <b-col md="2">
-            <b-form-group
-              label="신청날짜"
-              label-for="reportingDate"
-            >
-              <b-form-input
-                id="reportingDate"
-                type="date"
-                placeholder="1"
-              />
-            </b-form-group>
-          </b-col>
-          <!-- Profession -->
-          <b-col md="2">
-            <b-form-group
-              label="결제상태"
-              label-for="slipStatus"
-            >
-              <b-form-input
-                id="slipStatus"
-                type="text"
-                placeholder="미결"
-              />
-            </b-form-group>
-          </b-col>
-
-          <!-- Remove Button -->
-          <b-col
-            lg="2"
-            md="3"
-            class="mb-50"
-          >
-            <b-button
-              v-ripple.400="'rgba(234, 84, 85, 0.15)'"
-              variant="outline-danger"
-              class="mt-0 mt-md-2"
-              @click="removeItem(index)"
-            >
-              <feather-icon
-                icon="XIcon"
-                class="mr-25"
-              />
-              <span>Delete</span>
-            </b-button>
-          </b-col>
-          <b-col cols="12">
-            <hr>
-          </b-col>
-        </b-row>
-
-      </b-form>
-    </div>
-    <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="primary"
-      @click="repeateAgain"
-    >
-      <feather-icon
-        icon="PlusIcon"
-        class="mr-25"
+      <MenuSlipForm
+        style="justify-content: end"
+        :active-button="activeButton"
+        :add-bt-status="addBtStatus"
       />
-      <span>Add New</span>
-    </b-button>
+      <h1>전표</h1>
+      <b-table
+        :items="newSlipForm"
+        :fields="slipFiled"
+        empty-text="없음"
+      />
+      <h1>분개 </h1>
+      <b-table
+        :items="newJournalForm"
+        :fields="journalFiled"
+        striped
+        responsive
+      />
+
+      <h1>분개상세 </h1>
+      <b-table
+        :fields="detailJournalFiled"
+        striped
+        responsive
+      />
+      <div />
+    </div>
+    <div>
+      <!-- 모달은 id 이용-->
+      <!-- 전표추가 모달-->
+      <!--하나의 inputForm 태그 사용 < 조건을 props로 내려줌>-->
+      <b-modal
+        id="openAddSlipModal"
+        title="전표추가"
+        @ok="completeSilpForm"
+      >
+        <p class="my-5">
+          <InputForm
+            ref="inputSlipForm"
+            modal-status="addSlip"
+          />
+        </p>
+      </b-modal>
+      <!-- 분개추가 모달 -->
+      <b-modal
+        id="openAddJounalModal"
+        title="분개추가"
+        @ok="completeJounalForm"
+      >
+        <p class="my-5">
+          <InputForm
+            ref="inputJounalForm"
+            modal-status="addJounal"
+          />
+        </p>
+      </b-modal>
+    </div>
+
   </div>
 </template>
-
 <script>
-import {
-  BForm, BFormGroup, BFormInput, BRow, BCol, BButton,
-} from 'bootstrap-vue'
-import { heightTransition } from '@core/mixins/ui/transition'
-import Ripple from 'vue-ripple-directive'
+import { BTable } from 'bootstrap-vue'
+import MenuSlipForm from './MenuSlipForm.vue'
+import InputForm from './InputForm.vue'
 
 export default {
   components: {
-    BForm,
-    BRow,
-    BCol,
-    BButton,
-    BFormGroup,
-    BFormInput,
+    BTable,
+    MenuSlipForm,
+    InputForm,
   },
-  directives: {
-    Ripple,
-  },
-  mixins: [heightTransition],
+
   data() {
     return {
-      items: [{
-        id: 1,
-        slipNo: 'NEW',
-        accountPeriodNo: '5', // 2020년은 기수일련번호 ->  4
-        slipType: '결산',
-        reportingDate: '',
-        reportingEmpCode: sessionStorage.getItem('empCodeInfo_token'), // 작성사코드
-        expenseReport: '',
-        approvalDate: '',
-        reportingEmpName: sessionStorage.getItem('empNameInfo_token'), // 로그인 이름
-        slipStatus: '미결',
-        deptCode: 'DPT-01',
-        status: '',
-      }],
-      nextTodoId: 2,
+      today: '',
+      activeButton: 'addSlip',
+      addBtStatus: false,
+      slipFiled: [
+        { key: 'accountPeriodNo', label: '기수일련번호' },
+        { key: 'slipNo', label: '전표일련번호' },
+        { key: 'slipType', label: '전표유형' },
+        { key: 'reportingDate', label: '작성날짜' },
+        { key: 'reportingEmpCode', label: '작성자코드' },
+        { key: 'expenseReport', label: '품의내역' },
+        { key: 'slipStatus', label: '승인상태' },
+      ],
+      journalFiled: [
+        { key: 'journalNo', label: '분개일련번호', editable: true },
+        { key: 'accountCode', label: '계정코드', editable: true },
+        { key: 'accountName', label: '계정과목' },
+        { key: 'balanceDivision', label: '대차구분' },
+        { key: 'customerCode', label: '거래처코드' },
+        { key: 'customerName', label: '거래처명' },
+        { key: 'leftDebtorPrice', label: '차변금액' },
+        { key: 'rightCreditsPrice', label: '대변금액' },
+      ],
+      detailJournalFiled: [
+        { key: 'journalNo', label: '분개번호' },
+        { key: 'accountCode', label: '코드' },
+        { key: 'accountName', label: '분개상세항목' },
+        { key: 'balanceDivision', label: '상세내용' },
+      ],
+      newSlipForm: [],
+      newJournalForm: [],
 
     }
   },
-  mounted() {
-    this.initTrHeight()
+  computed: {
+
   },
   created() {
-    window.addEventListener('resize', this.initTrHeight)
-  },
-  destroyed() {
-    window.removeEventListener('resize', this.initTrHeight)
+
   },
   methods: {
-    // 추가
-    repeateAgain() {
-      this.items.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
 
-      this.$nextTick(() => {
-        this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+    // 모달 버튼제출
+    completeSilpForm() {
+      this.newSlipForm.push(this.$refs.inputSlipForm.slipForm)
+
+      this.addBtStatus = true
     },
-    removeItem(index) {
-      this.items.splice(index, 1)
-      this.trTrimHeight(this.$refs.row[0].offsetHeight)
-    },
-    initTrHeight() {
-      this.trSetHeight(null)
-      this.$nextTick(() => {
-        this.trSetHeight(this.$refs.form.scrollHeight)
-      })
+    completeJounalForm() {
+      this.newJournalForm.push(this.$refs.inputJounalForm.journalForm)
     },
   },
 }
@@ -218,4 +134,5 @@ export default {
   overflow: hidden;
   transition: .35s height;
 }
+
 </style>

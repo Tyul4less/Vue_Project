@@ -74,6 +74,7 @@
       <!--테이블안에 버튼넣기 -->
       <div slot="table-actions">
         <MenuSlipForm
+          :active-button="activeButton"
           @deleteItem="deleteSlip"
           @editItem="editSlip"
         />
@@ -180,6 +181,7 @@ export default {
 
   data() {
     return {
+      activeButton: 'searchSlip',
       buttonCondition: '',
       pageLength: 10,
       dir: false,
@@ -241,7 +243,7 @@ export default {
     },
     // 체크박스 선택
     selectionChanged(params) {
-      const isStatus = params.selectedRows.map(v => v.slipStatus).includes('미결')
+      const isStatus = params.selectedRows.map(v => v.slipStatus).includes('승인')
       console.log(isStatus)
       if (isStatus) {
         Vue.$toast.info('승인된 전표는 수정이 불가합니다')
@@ -255,7 +257,7 @@ export default {
     // 삭제
     async deleteSlip() {
       if (!this.deleteItem.length) {
-        Vue.$toast.info('전표를 선택해주세요')
+        Vue.$toast.info('승인된 전표는 삭제가 불가합니다')
         return
       }
       const response = await this.DELETE_SLIP(this.deleteItem)
@@ -283,6 +285,3 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-
-</style>

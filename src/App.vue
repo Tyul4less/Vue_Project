@@ -29,7 +29,6 @@ const LayoutFull = () => import('@/layouts/full/LayoutFull.vue')
 
 export default {
   components: {
-
     // Layouts
     LayoutHorizontal,
     LayoutVertical,

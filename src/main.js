@@ -1,5 +1,7 @@
 import Vue from 'vue'
-import { ToastPlugin, ModalPlugin } from 'bootstrap-vue'
+import {
+  ToastPlugin, ModalPlugin,
+} from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
 
 import router from './router'
@@ -18,8 +20,8 @@ import '@/libs/sweet-alerts'
 // v필터
 import { formatDate } from './utils/filters'
 // BSV Plugin Registration
-Vue.use(ToastPlugin)
-Vue.use(ModalPlugin)
+Vue.use(ToastPlugin) // alert창
+Vue.use(ModalPlugin) // 모달
 
 // Composition API
 Vue.use(VueCompositionAPI)
