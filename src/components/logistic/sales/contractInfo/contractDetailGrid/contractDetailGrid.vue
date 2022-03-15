@@ -25,7 +25,7 @@
     <b-table
       hover
       :items="thisMonthDetailGrid"
-      :fields="detailTableColumns"
+      :fields="fields"
       style="width: 1700px"
       show-empty
       empty-text="No matching records found"
@@ -67,12 +67,25 @@ export default {
     // ...mapActions('logi/sales', ['searchContract']), 메소드에 선언해야함
     ...mapState({
       thisMonthDetailGrid: state => state.logi.sales.thisMonthDetailGrid,
-      detailTableColumns: state => state.logi.sales.detailTableColumns,
-
     }),
   },
   data() {
     return {
+      fields: [
+        { key: 'contractDetailNo', label: '수주상세일련번호', sortable: true },
+        { key: 'mrpGatheringNo', label: '취합발주번호', sortable: true },
+        { key: 'itemName', label: '품목명', sortable: true },
+        { key: 'dueDateOfContract', label: '납기일', sortable: true },
+        { key: 'estimateAmount', label: '견적수량', sortable: true },
+        { key: 'stockAmountUse', label: '재고사용량', sortable: true },
+        { key: 'productionRequirement', label: '제작필요수량', sortable: true },
+        { key: 'unitPriceOfContract', label: '견적단가', sortable: true },
+        { key: 'sumPriceOfContract', label: '합계액', sortable: true },
+        { key: 'operationCompletedStatus', label: '납품가능여부', sortable: true },
+        { key: 'deliveryCompletionStatus', label: '납품완료여부', sortable: true },
+        { key: 'description', label: '비고', sortable: true },
+      ],
+
       contractDetailRow: [],
     }
   },

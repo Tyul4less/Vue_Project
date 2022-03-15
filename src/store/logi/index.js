@@ -1,4 +1,4 @@
-import router from '@/router/index'
+import sales from './sales/state'
 
 export default {
   namespaced: true,
@@ -8,5 +8,8 @@ export default {
   getters: {
   },
   mutations: {
+  },
+  modules: {
+    sales,
   },
 }
