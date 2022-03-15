@@ -1,4 +1,5 @@
 export default [
+
   {
     title: '자재관리',
     icon: 'BoxIcon',
@@ -15,4 +16,5 @@ export default [
       },
     ],
   },
+
 ]

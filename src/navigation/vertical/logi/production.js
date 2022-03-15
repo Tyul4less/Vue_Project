@@ -1,4 +1,5 @@
 export default [
+
   {
     title: '생산관리',
     icon: 'PackageIcon',
@@ -18,4 +19,5 @@ export default [
       },
     ],
   },
+
 ]

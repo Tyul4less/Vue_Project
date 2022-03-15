@@ -1,4 +1,5 @@
 export default [
+
   {
     title: '영업 관리',
     icon: 'TrendingUpIcon',
@@ -42,4 +43,5 @@ export default [
       },
     ],
   },
+
 ]
