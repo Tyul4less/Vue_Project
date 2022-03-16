@@ -4,9 +4,11 @@ import actions from './action'
 export default {
   namespaced: true,
   state: {
-    contractDetailList: [],
+    alertDialogToggle: false,
+    alertDialogInfo: null,
   },
   getters: {
+
   },
 
   mutations,

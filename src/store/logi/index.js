@@ -1,3 +1,5 @@
+import router from '@/router/index'
+import production from '@/store/logi/production/state'
 import sales from './sales/state'
 
 export default {
@@ -10,6 +12,6 @@ export default {
   mutations: {
   },
   modules: {
-    sales,
+    sales, production
   },
 }
