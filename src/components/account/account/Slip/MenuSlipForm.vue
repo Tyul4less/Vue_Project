@@ -15,6 +15,7 @@
         v-if="activeButton==='addSlip'"
         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
         v-b-modal.openAddJounalModal
+        :disabled="!addBtStatus"
         variant="primary"
       >
         분개추가
