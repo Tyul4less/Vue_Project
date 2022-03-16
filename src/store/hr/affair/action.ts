@@ -11,7 +11,7 @@ const FetchAxiosEmp: AxiosInstance =
         },
     })
 
-class AFFAIR { // AFFAIR.GET_ALL_EMP_LIST();
+class AFFAIR { // AFFAIR.GET_ALL_EMP_LIST(); 로 불러올 수 있음
     GET_ALL_EMP_LIST() {
         console.log('액션')
         // import and DispatchHrEmp.getAll();
