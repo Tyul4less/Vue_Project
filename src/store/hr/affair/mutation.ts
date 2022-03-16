@@ -2,6 +2,8 @@ import {State} from "./state";
 import {MutationTree} from "vuex";
 //import {SET_ALL_EMP_LIST} from './mutation-types'
 
+/*** VUE version 2 TYPESCRIPT 를 구현함 ***/
+
 enum MutationTypes{
     SET_ALL_EMP_LIST = "SET_ALL_EMP_LIST"
 }

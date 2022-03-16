@@ -26,7 +26,7 @@
         <b-form-group
             class="mb-0"
         >
-          <label class="d-inline-block text-sm-left mr-50">Per page</label>
+          <label class="d-inline-block text-sm-left mr-50">페이지 수</label>
           <b-form-select
               id="perPageSelect"
               v-model="perPage"
@@ -42,7 +42,7 @@
           class="my-1"
       >
         <b-form-group
-            label="Sort"
+            label="정렬"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -83,7 +83,7 @@
           class="my-1"
       >
         <b-form-group
-            label="Filter"
+            label="전체 검색"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -95,7 +95,7 @@
                 id="filterInput"
                 v-model="filter"
                 type="search"
-                placeholder="Type to Search"
+                placeholder="검색어"
             />
             <b-input-group-append>
               <b-button
@@ -109,33 +109,38 @@
         </b-form-group>
       </b-col>
 
-      <b-col cols="12">
-        <b-table
-            striped
-            hover
-            responsive
-            :per-page="perPage"
-            :current-page="currentPage"
-            :items="items"
-            :fields="fields"
-            :sort-by.sync="sortBy"
-            :sort-desc.sync="sortDesc"
-            :sort-direction="sortDirection"
-            :filter="filter"
-            :filter-included-fields="filterOn"
-            @filtered="onFiltered"
-        >
-          <!--          <template #cell(avatar)="data">
-                      <b-avatar :src="data.value" />
-                    </template>
-
-                    <template #cell(status)="data">
-                      <b-badge :variant="status[1][data.value]">
-                        {{ status[0][data.value] }}
-                      </b-badge>
-                    </template>-->
-        </b-table>
-      </b-col>
+      <transition class="start">
+        <b-col cols="12">
+          <b-table
+              striped
+              hover
+              responsive
+              :per-page="perPage"
+              :current-page="currentPage"
+              :items="items"
+              :fields="fields"
+              :sort-by.sync="sortBy"
+              :sort-desc.sync="sortDesc"
+              :sort-direction="sortDirection"
+              :filter="filter"
+              :filter-included-fields="filterOn"
+              @filtered="onFiltered"
+              @row-clicked="onRowEmpDetailRouting"
+          >
+            <template #cell(button)="data">
+              <button @click="abc">asdf</button>
+            </template>
+            <template #cell(avatar)="data">
+              <b-avatar :src="require(`@/assets/images/avatars/${data.item.empCode}.png`)"/>
+            </template>
+            <!--                      <template #cell(status)="data">
+                                    <b-badge :variant="status[1][data.value]">
+                                      {{ status[0][data.value] }}
+                                    </b-badge>
+                                  </template>-->
+          </b-table>
+        </b-col>
+      </transition>
 
       <b-col
           cols="12"
@@ -176,6 +181,7 @@ import {
 import AFFAIR from '@/store/hr/affair/action.js'
 import {state} from '@/store/hr/affair/state.js'
 import {mapState} from "vuex";
+import router from "@/router";
 
 export default {
   components: {
@@ -243,17 +249,15 @@ export default {
   },
   beforeCreate() {
     AFFAIR.GET_ALL_EMP_LIST();
-    this.items = state.allEmpList.empList;
-    console.log("mounted");
-    console.log(state.allEmpList.empList);
   },
+
   mounted() {
     const timeout = setTimeout(() => {
-      console.log("beforeUpdate")
       this.items = state.allEmpList.empList;
       this.totalRows = state.allEmpList.empList.length;
-    }, 2000)
+    }, 700)
   },
+
   methods: {
     info(item, index, button) {
       this.infoModal.title = `Row index: ${index}`
@@ -269,11 +273,27 @@ export default {
       this.totalRows = filteredItems.length
       this.currentPage = 1
     },
+    onRowEmpDetailRouting(items) {
+      console.log("clicked")
+      console.log(items);
+      console.log(items.empCode);
+      //router.push('/hr/emp-detail/')
+    }
   }
 }
 
 </script>
 
 <style>
+.start-enter-from {
+  opacity: 0;
+}
 
+.start-enter-active {
+  transition: all 3s;
+}
+
+.start-enter-to {
+  opacity: 1;
+}
 </style>

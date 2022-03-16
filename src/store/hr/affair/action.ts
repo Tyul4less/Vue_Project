@@ -3,6 +3,8 @@ import {mutations} from "./mutation";
 import {state} from "./state";
 import {resolveRules} from "vee-validate/dist/types/utils/vnode";
 
+/*** VUE version 2 TYPESCRIPT 를 구현함 ***/
+
 const FetchAxiosEmp: AxiosInstance =
     axios.create({
         baseURL: "http://localhost:8081",
@@ -11,7 +13,7 @@ const FetchAxiosEmp: AxiosInstance =
         },
     })
 
-class AFFAIR { // AFFAIR.GET_ALL_EMP_LIST();
+class AFFAIR { // AFFAIR.GET_ALL_EMP_LIST(); 로 불러올 수 있음
     GET_ALL_EMP_LIST() {
         console.log('액션')
         // import and DispatchHrEmp.getAll();

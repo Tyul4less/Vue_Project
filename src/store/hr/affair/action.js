@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const mutation_1 = require("./mutation");
 const state_1 = require("./state");
+/*** VUE version 2 TYPESCRIPT 를 구현함 ***/
 const FetchAxiosEmp = axios_1.default.create({
     baseURL: "http://localhost:8081",
     headers: {
