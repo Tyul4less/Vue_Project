@@ -172,7 +172,6 @@ export default {
     ...mapState({
       thisMonthGrid: state => state.logi.sales.thisMonthGrid,
       thisMonthDetailGrid: state => state.logi.sales.thisMonthDetailGrid,
-      tableColumns: state => state.logi.sales.tableColumns,
     }),
   },
   data: () => ({
@@ -208,6 +207,7 @@ export default {
 
     const {
 
+      tableColumns,
       perPage,
       currentPage,
       totalInvoices,
@@ -227,6 +227,7 @@ export default {
     } = useInvoicesList()
 
     return {
+      tableColumns,
       perPage,
       currentPage,
       totalInvoices,

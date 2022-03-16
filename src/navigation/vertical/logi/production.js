@@ -1,4 +1,5 @@
 export default [
+
   {
     title: '생산관리',
     icon: 'PackageIcon',
@@ -6,6 +7,7 @@ export default [
       {
         title: '주생산계획 (MPS)',
         route: 'mps',
+
       },
       {
         title: '소요량 전개/취합 (MRP)',
