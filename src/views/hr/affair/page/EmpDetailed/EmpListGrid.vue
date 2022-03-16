@@ -162,26 +162,24 @@
 
 <script>
 import {
-  BTable,
   BAvatar,
   BBadge,
-  BRow,
-  BCol,
-  BFormGroup,
-  BFormSelect,
-  BPagination,
-  BInputGroup,
-  BFormInput,
-  BInputGroupAppend,
   BButton,
   BCard,
+  BCardText,
+  BCol,
+  BFormGroup,
+  BFormInput,
+  BFormSelect,
+  BInputGroup,
+  BInputGroupAppend,
   BLink,
-  BCardText
+  BPagination,
+  BRow,
+  BTable
 } from 'bootstrap-vue'
-import AFFAIR from '@/store/hr/affair/action.js'
-import {state} from '@/store/hr/affair/state.js'
+
 import {mapState} from "vuex";
-import router from "@/router";
 
 export default {
   components: {
@@ -239,7 +237,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('hr/affair', ['allEmpList']),
+    ...mapState({ empList : state => state.hr.emp.allEmpList.empList }),
     sortOptions() {
       // Create an options list from our fields
       return this.fields
@@ -248,13 +246,14 @@ export default {
     },
   },
   beforeCreate() {
-    AFFAIR.GET_ALL_EMP_LIST();
+    console.log('beforecreate')
+    this.$store.dispatch('hr/emp/GET_ALL_EMP_LIST');
   },
 
   mounted() {
     const timeout = setTimeout(() => {
-      this.items = state.allEmpList.empList;
-      this.totalRows = state.allEmpList.empList.length;
+      this.items = this.empList;
+      this.totalRows = this.empList.length;
     }, 700)
   },
 

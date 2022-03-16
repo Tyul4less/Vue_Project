@@ -7,8 +7,10 @@ var MutationTypes;
 (function (MutationTypes) {
     MutationTypes["SET_ALL_EMP_LIST"] = "SET_ALL_EMP_LIST";
 })(MutationTypes || (MutationTypes = {}));
+/////////////////////////위에꺼 안써도됨////////////////////////////////
 exports.mutations = {
-    [MutationTypes.SET_ALL_EMP_LIST](state, payload) {
+    SET_ALL_EMP_LIST(state, payload) {
         state.allEmpList = payload;
     }
 };
+exports.default = exports.mutations;
