@@ -37,7 +37,7 @@
               md="4"
               class="mb-1"
             >
-              <strong>분개번호 : </strong>{{ row.item.journalDetailList[0].journalDetailNo }}
+              <strong>분개상세번호 : </strong>{{ row.item.journalDetailList[0].journalDetailNo }}
             </b-col>
             <b-col
               md="4"

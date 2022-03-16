@@ -21,6 +21,7 @@
 import { BCard, BCardText, BLink } from 'bootstrap-vue'
 import { mapState } from 'vuex'
 
+
 export default {
   components: {
     BCard,
@@ -34,6 +35,7 @@ export default {
     companyInfo: state => state.auth.companyInfo,
   }),
 }
+
 </script>
 
 <style>
