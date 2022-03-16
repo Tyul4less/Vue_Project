@@ -78,6 +78,7 @@ export default {
       today: '',
       activeButton: 'addSlip',
       addBtStatus: false,
+
       slipFiled: [
         { key: 'accountPeriodNo', label: '기수일련번호' },
         { key: 'slipNo', label: '전표일련번호' },
@@ -88,8 +89,8 @@ export default {
         { key: 'slipStatus', label: '승인상태' },
       ],
       journalFiled: [
-        { key: 'journalNo', label: '분개일련번호', editable: true },
-        { key: 'accountCode', label: '계정코드', editable: true },
+        { key: 'journalNo', label: '분개일련번호' },
+        { key: 'accountCode', label: '계정코드' },
         { key: 'accountName', label: '계정과목' },
         { key: 'balanceDivision', label: '대차구분' },
         { key: 'customerCode', label: '거래처코드' },
