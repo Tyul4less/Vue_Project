@@ -69,6 +69,7 @@
                     <b-form-input
                       id="company-code"
                       v-model="companyCode"
+                      d
                       disabled
                       :state="errors.length > 0 ? false:null"
                       name="companyCode"

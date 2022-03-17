@@ -122,6 +122,7 @@
               id="accountCode"
               v-model="journalForm.accountCode"
               list="my-list-id"
+              @click="openSearchModal('accountCode')"
             />
 
           </b-form-group>
@@ -135,7 +136,7 @@
             <b-form-input
               id="accountName"
               v-model="journalForm.accountName"
-              disabled
+              @click="openSearchModal('accountName')"
             />
           </b-form-group>
         </b-col>
@@ -204,6 +205,20 @@
       </b-col>
     </b-form>
 
+    <!-- 계정코드 , 계정명 전용 모달-->
+    <b-modal
+      id="accountCode"
+      ref="accountModal"
+      :title="searchCondition==='accountCode'? '계정코드찾기' : '계정명 찾기'"
+    >
+      <p class="my-5">
+        <accountForm
+          v-model:value="resultCode"
+          :condition="searchCondition"
+          @input="searchCode"
+        />
+      </p>
+    </b-modal>
   </div>
 
 </template>
@@ -212,9 +227,11 @@ import {
   BRow, BCol, BFormGroup, BFormInput, BForm, BButton, BFormSelect,
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
+import accountForm from '@/components/account/base/accountForm.vue'
 
 export default {
   components: {
+    accountForm,
     BRow,
     BCol,
     BFormGroup,
@@ -230,6 +247,8 @@ export default {
   props: ['modalStatus'],
   data() {
     return {
+      searchCondition: '',
+      resultCode: '',
       options: [
         { value: '대변', text: '대변' },
         { value: '차변', text: '차변' },
@@ -262,8 +281,25 @@ export default {
     }
   },
   methods: {
-    searchAccountCode() {
-      console.log(2222)
+    openSearchModal(name) {
+      console.log(name)
+      if (name === 'accountName') {
+        this.searchCondition = 'accountName'
+      } else {
+        this.searchCondition = 'accountCode'
+      }
+
+      // 클릭시 모달열떄  1번 모달 오픈 , 2번 모달 id
+
+      this.$root.$emit('bv::show::modal', 'accountCode', '#focusThisOnClose')
+    },
+    searchCode() {
+      // 문자열이면 true
+      if (isNaN(this.resultCode)) {
+        this.journalForm.accountName = this.resultCode
+      } else {
+        this.journalForm.accountCode = this.resultCode
+      }
     },
   },
 

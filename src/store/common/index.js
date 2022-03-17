@@ -1,11 +1,9 @@
-import account from './account/state'
-import base from './base/state'
+import utils from '@/store/common/utils/state'
 
 export default {
   namespaced: true,
   modules: {
-    account,
-    base,
+    utils,
   },
   state: {
     connect: false,

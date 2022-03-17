@@ -1,7 +1,14 @@
-import { computed, ref, watch } from '@vue/composition-api'
+import { ref, watch, computed } from '@vue/composition-api'
+import store from '@/store'
+
 // Notification
+import { useToast } from 'vue-toastification/composition'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default function useInvoicesList() {
+  // Use toast
+  const toast = useToast()
+
   const refInvoiceListTable = ref(null)
 
   // Table Handlers
@@ -48,6 +55,30 @@ export default function useInvoicesList() {
     refetchData()
   })
 
+  // *===============================================---*
+  // *--------- UI ---------------------------------------*
+  // *===============================================---*
+
+  const resolveInvoiceStatusVariantAndIcon = status => {
+    if (status === 'Partial Payment') return { variant: 'warning', icon: 'PieChartIcon' }
+    if (status === 'Paid') return { variant: 'success', icon: 'CheckCircleIcon' }
+    if (status === 'Downloaded') return { variant: 'info', icon: 'ArrowDownCircleIcon' }
+    if (status === 'Draft') return { variant: 'primary', icon: 'SaveIcon' }
+    if (status === 'Sent') return { variant: 'secondary', icon: 'SendIcon' }
+    if (status === 'Past Due') return { variant: 'danger', icon: 'InfoIcon' }
+    return { variant: 'secondary', icon: 'XIcon' }
+  }
+
+  const resolveClientAvatarVariant = status => {
+    if (status === 'Partial Payment') return 'primary'
+    if (status === 'Paid') return 'danger'
+    if (status === 'Downloaded') return 'secondary'
+    if (status === 'Draft') return 'warning'
+    if (status === 'Sent') return 'info'
+    if (status === 'Past Due') return 'success'
+    return 'primary'
+  }
+
   return {
     tableColumns,
     perPage,
@@ -61,6 +92,9 @@ export default function useInvoicesList() {
     refInvoiceListTable,
 
     statusFilter,
+
+    resolveInvoiceStatusVariantAndIcon,
+    resolveClientAvatarVariant,
 
     refetchData,
   }
