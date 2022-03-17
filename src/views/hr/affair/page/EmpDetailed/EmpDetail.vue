@@ -43,6 +43,7 @@
               >
                 Delete
               </b-button>
+              <button @click="abc"> 값조회 </button>
             </div>
           </div>
         </div>
@@ -159,13 +160,19 @@
   </b-card>
 </template>
 
-<script>
-import {
+<script lang="ts">
+import
+{
   BCard, BButton, BAvatar, BRow, BCol,
 } from 'bootstrap-vue'
-import { avatarText } from '@core/utils/filter'
+import {state} from '@/store/hr/affair/state.js';
+import AFFAIR from '@/store/hr/affair/action.js';
+//import { avatarText } from "@core/utils/filter.js";
 
-export default {
+// typeScript 적용
+import {defineComponent} from "@vue/composition-api";
+
+export default defineComponent({
   components: {
     BCard, BButton, BRow, BCol, BAvatar,
   },
@@ -178,7 +185,6 @@ export default {
   setup() {
     const { resolveUserRoleVariant } = useUsersList()
     return {
-      avatarText,
       resolveUserRoleVariant,
     }
   },
@@ -200,8 +206,13 @@ export default {
             status: 2,
           }],
     }
+  },
+  methods : {
+    abc(){
+      console.log(state.allEmpList);
+    }
   }
-}
+})
 </script>
 
 <style>
