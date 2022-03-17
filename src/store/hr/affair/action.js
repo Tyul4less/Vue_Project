@@ -1,11 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = __importDefault(require("axios"));
+import axios from 'axios';
 /*** VUE version 2 TYPESCRIPT 를 구현함 ***/
-const FetchAxiosEmp = axios_1.default.create({
+const FetchAxiosEmp = axios.create({
     baseURL: "http://localhost:8081",
     headers: {
         "content-type": "application/json"
@@ -16,6 +11,12 @@ const actions = {
         FetchAxiosEmp.get("/hr/affair/empList")
             .then((response) => {
             state.commit('SET_ALL_EMP_LIST', response.data);
+        });
+    },
+    GET_EMP_DETAIL(state, empCode) {
+        FetchAxiosEmp.get("/hr/affair/empDetailInfo/", { params: { empCode: empCode } })
+            .then((response) => {
+            state.commit('SET_EMP_DETAIL', response.data);
         });
     }
 };
@@ -29,4 +30,4 @@ const actions = {
             });
     }
 }*/
-exports.default = actions;
+export default actions;

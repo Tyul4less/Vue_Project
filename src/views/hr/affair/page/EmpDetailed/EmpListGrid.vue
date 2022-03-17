@@ -180,6 +180,7 @@ import {
 } from 'bootstrap-vue'
 
 import {mapState} from "vuex";
+import router from "@/router";
 
 export default {
   components: {
@@ -273,10 +274,9 @@ export default {
       this.currentPage = 1
     },
     onRowEmpDetailRouting(items) {
-      console.log("clicked")
-      console.log(items);
-      console.log(items.empCode);
-      //router.push('/hr/emp-detail/')
+      this.$store.dispatch('hr/emp/GET_EMP_DETAIL',items.empCode);
+      router.push(`/hr/emp-detail/?empCode=${items.empCode}`)
+      console.log(this.$route.params);
     }
   }
 }

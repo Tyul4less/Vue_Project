@@ -18,6 +18,12 @@ const actions: ActionTree<EmpList, Object> = {
         .then((response) => {
             state.commit('SET_ALL_EMP_LIST',response.data)
         });
+    },
+    GET_EMP_DETAIL(state: ActionContext<EmpList, Object>,empCode: string){
+        FetchAxiosEmp.get("/hr/affair/empDetailInfo/",{params:{empCode: empCode}})
+            .then((response)=>{
+                state.commit('SET_EMP_DETAIL', response.data)
+            })
     }
 }
 
