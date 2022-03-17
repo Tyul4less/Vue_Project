@@ -31,7 +31,8 @@
                 />
               </span>
               <h2 class="brand-text">
-                {{ appName }}
+                6대원전자9
+<!--                {{ appName }}-->
               </h2>
             </b-link>
           </li>
