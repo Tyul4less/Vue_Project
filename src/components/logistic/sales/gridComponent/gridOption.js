@@ -1,19 +1,22 @@
-import { computed, ref, watch } from '@vue/composition-api'
+import { ref, watch, computed } from '@vue/composition-api'
+import store from '@/store'
+
 // Notification
+import { useToast } from 'vue-toastification/composition'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default function useInvoicesList() {
-  const refInvoiceListTable = ref(null)
+  // Use toast
+  const toast = useToast()
 
-  // Table Handlers
+  const refInvoiceListTable = ref(null)
 
   const perPage = ref(10)
   const totalInvoices = ref(0)
   const currentPage = ref(1)
   const perPageOptions = [10, 25, 50, 100]
-  const searchQuery = ref('')
   const sortBy = ref('id')
   const isSortDirDesc = ref(true)
-  const statusFilter = ref(null)
 
   const dataMeta = computed(() => {
     const localItemsCount = refInvoiceListTable.value ? refInvoiceListTable.value.localItems.length : 0
@@ -28,22 +31,36 @@ export default function useInvoicesList() {
     refInvoiceListTable.value.refresh()
   }
 
-  watch([currentPage, perPage, searchQuery, statusFilter], () => {
+  watch([currentPage, perPage], () => {
     refetchData()
   })
 
+  const fetchInvoices = leng => {
+    totalInvoices.value = leng
+  }
+
+  const resolveClientAvatarVariant = status => {
+    if (status === 'Partial Payment') return 'primary'
+    if (status === 'Paid') return 'danger'
+    if (status === 'Downloaded') return 'secondary'
+    if (status === 'Draft') return 'warning'
+    if (status === 'Sent') return 'info'
+    if (status === 'Past Due') return 'success'
+    return 'primary'
+  }
+
   return {
+    fetchInvoices,
     perPage,
     currentPage,
     totalInvoices,
     dataMeta,
     perPageOptions,
-    searchQuery,
     sortBy,
     isSortDirDesc,
     refInvoiceListTable,
 
-    statusFilter,
+    resolveClientAvatarVariant,
 
     refetchData,
   }

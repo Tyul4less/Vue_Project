@@ -2,9 +2,9 @@
 
   <!-- Table Container Card -->
   <b-card
-    id="style-7"
+    id="scrollStyle"
     no-body
-    style="font-family: '배달의민족 도현'; overflow: scroll; overflow-y: hidden"
+    style="font-family: '배달의민족 도현'; overflow-x: scroll; max-height: 500px"
   >
 
     <div class="m-2">
@@ -16,7 +16,8 @@
           md="6"
           class="d-flex align-items-center justify-content-start mb-1 mb-md-0"
         >
-          <h2>수주상세</h2>
+          <slot name="header" />
+
         </b-col>
       </b-row>
 
@@ -24,9 +25,9 @@
 
     <b-table
       hover
-      :items="thisMonthDetailGrid"
-      :fields="fields"
-      style="width: 1700px"
+      :items="detailGrid"
+      :fields="detailTableColumns"
+      style="width: 1700px; overflow-y: scroll;"
       show-empty
       empty-text="No matching records found"
     />
@@ -66,26 +67,13 @@ export default {
   computed: {
     // ...mapActions('logi/sales', ['searchContract']), 메소드에 선언해야함
     ...mapState({
-      thisMonthDetailGrid: state => state.logi.sales.thisMonthDetailGrid,
+        detailGrid: state => state.logi.sales.detailGrid,
+      detailTableColumns: state => state.logi.sales.detailTableColumns,
+
     }),
   },
   data() {
     return {
-      fields: [
-        { key: 'contractDetailNo', label: '수주상세일련번호', sortable: true },
-        { key: 'mrpGatheringNo', label: '취합발주번호', sortable: true },
-        { key: 'itemName', label: '품목명', sortable: true },
-        { key: 'dueDateOfContract', label: '납기일', sortable: true },
-        { key: 'estimateAmount', label: '견적수량', sortable: true },
-        { key: 'stockAmountUse', label: '재고사용량', sortable: true },
-        { key: 'productionRequirement', label: '제작필요수량', sortable: true },
-        { key: 'unitPriceOfContract', label: '견적단가', sortable: true },
-        { key: 'sumPriceOfContract', label: '합계액', sortable: true },
-        { key: 'operationCompletedStatus', label: '납품가능여부', sortable: true },
-        { key: 'deliveryCompletionStatus', label: '납품완료여부', sortable: true },
-        { key: 'description', label: '비고', sortable: true },
-      ],
-
       contractDetailRow: [],
     }
   },
@@ -117,9 +105,9 @@ export default {
     </style>
 
     <style lang="scss">
-      @import '../../../../../../@core/scss/vue/libs/vue-select';
+      @import '/src/@core/scss/vue/libs/vue-select';
 
-      #style-7::-webkit-scrollbar-track
+      #scrollStyle::-webkit-scrollbar-track
       {
       -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
       background-color: rgba(50,60,150,1);
@@ -127,13 +115,13 @@ export default {
       box-shadow: inset 0px 0px 5px rgba(50,50,150,1);
       }
 
-      #style-7::-webkit-scrollbar
+      #scrollStyle::-webkit-scrollbar
       {
       width: 10px;
       background-color: rgba(50,50,150,0);
       }
 
-      #style-7::-webkit-scrollbar-thumb
+      #scrollStyle::-webkit-scrollbar-thumb
       {
       background-clip: padding-box;
       border: 4px solid transparent;

@@ -17,12 +17,28 @@ function searchContract(date) {
   })
 }
 function searchContractDetail(contractNo) {
-  console.log(contractNo)
   return logiApi.get('/sales/searchContractDetail', {
     params: {
       contractNo,
     },
   })
 }
+function searchEstimateInContractAvailable(sendDate) {
+  return logiApi.get('/sales/searchEstimateInContractAvailable', {
+    params: {
+      ...sendDate,
+    },
+  })
+}
+function searchEstimateDetailInfo(estimateNo) {
+  console.log(estimateNo)
+  return logiApi.get('/sales/searchEstimateDetail', {
+    params: {
+      estimateNo,
+    },
+  })
+}
 
-export { searchContract, searchContractDetail }
+export {
+  searchContract, searchContractDetail, searchEstimateInContractAvailable, searchEstimateDetailInfo,
+}

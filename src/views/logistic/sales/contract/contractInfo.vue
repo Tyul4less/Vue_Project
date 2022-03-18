@@ -1,7 +1,7 @@
 <template>
   <div>
     <contract-info-grid>
-      <template v-slot:datepicker>
+      <template v-slot:header>
         <h2
           class="mb-md-1"
           style="width: 50px"
@@ -84,41 +84,55 @@
           variant="primary"
           size="md"
           class="mb-md-1 ml-1"
-          @click="searchCustomerCode"
         >
           회사코드로 검색
         </b-button>
         <b-modal
           id="companyCode"
-          scrollable
           title="Scrollable Content"
           cancel-variant="outline-secondary"
         >
-          <template>
-            <BEditableTable
+          <b-card
+            class="scrollStyle"
+            style="margin:auto; overflow-y: scroll; height: 50vh; padding-left: 50px"
+          >
+            <b-form-radio-group
+              v-model="searchCompanyCodeOption"
+              :options="options"
+              class="demo-inline-spacing mb-1"
+              value-field="value"
+              text-field="text"
+              disabled-field="disabled"
+            />
+            <b-table
               hover
               selectable
               :select-mode="'single'"
-              :items="companyInfo"
+              :fields="fields"
+              :items="customerCodeList"
               @row-clicked="companyCodeClick"
             />
-          </template>
+          </b-card>
         </b-modal>
 
       </template>
     </contract-info-grid>
-    <contract-detail-info-grid />
+    <contract-detail-info-grid>
+      <template v-slot:header>
+        <h2>수주상세</h2>
+      </template>
+    </contract-detail-info-grid>
   </div>
 </template>
 
 <script>
 import {
-  BCard, BRow, BCol, BFormInput, BButton, BTable, BMedia, BAvatar, BLink,
+  BCard, BRow, BCol, BFormInput, BButton, BTable, BMedia, BAvatar, BLink, BFormRadioGroup, BCardText,
   BBadge, BDropdown, BDropdownItem, BPagination, BTooltip, BFormDatepicker, BInputGroup, BInputGroupAppend,
 } from 'bootstrap-vue'
 import BEditableTable from 'bootstrap-vue-editable-table'
-import contractInfoGrid from '@/views/logistic/sales/contract/contractInfo/contractInfoGrid/contractInfoGrid'
-import contractDetailInfoGrid from '@/views/logistic/sales/contract/contractInfo/contractInfoDetailGrid/contractDetailInfoGrid'
+import contractInfoGrid from '@/components/logistic/sales/contract/contractGrid/contractGrid'
+import contractDetailInfoGrid from '@/components/logistic/sales/contract/contractGrid/contractDetailGrid'
 import { mapActions, mapState } from 'vuex'
 
 export default {
@@ -141,18 +155,18 @@ export default {
     BInputGroup,
     BInputGroupAppend,
     BEditableTable,
+    BFormRadioGroup,
+    BCardText,
 
     contractInfoGrid,
     contractDetailInfoGrid,
   },
   computed: {
     ...mapState({
-      thisMonthGrid: state => state.logi.sales.thisMonthGrid,
-      companyInfo: state => state.auth.companyInfo,
+      grid: state => state.logi.sales.grid,
+      // companyInfo: state => state.auth.companyInfo,
+      customerCodeList: state => state.hr.company.companyCodeList,
     }),
-  },
-  created() {
-    this.searchCustomerCode()
   },
   data: () => ({
     startDate: '0000-00-0',
@@ -161,8 +175,27 @@ export default {
     workplaceName: '',
     workplaceCode: '',
     searchWorkplace: '',
-    companyCode: 'PTN-01',
+    companyCode: 'BRC-01',
+    customerCode: '',
+    searchCompanyCodeOption: '',
+    options: [
+      { text: '전체', value: 'ALL', disabled: false },
+      { text: '근무지별', value: 'WORKPLACE', disabled: false },
+    ],
+    fields: [
+      { key: 'customerCode', label: '화사코드' },
+      { key: 'customerName', label: '고객사명' },
+    ],
   }),
+  watch: {
+    searchCompanyCodeOption(newValue) {
+      if (newValue !== '') {
+        const searchOption = { searchCondition: newValue, workplaceCode: this.companyCode }
+        console.log(`watchDispatch${searchOption.searchCondition}`)
+        this.$store.dispatch('hr/company/searchCustomerList', searchOption)
+      }
+    },
+  },
   mounted() {
     // eslint-disable-next-line new-cap
     const tableColumns = [{
@@ -205,19 +238,22 @@ export default {
     this.searchContract('searchByDate')
   },
   methods: {
-    ...mapActions('logi/sales', ['searchCustomerCode']),
+    ...mapActions('logi/sales', ['searchCustomerList']),
     ...mapActions('auth', ['GET_COMPANY_CODE', 'GET_WORKPLACE_CODE', 'AUTHORITY_REQUEST']),
     searchContract(searchType) {
       const searchCondition = searchType
       const sendDate = {
-        startDate: this.startDate, endDate: this.endDate, customerCode: this.companyCode, searchCondition,
+        startDate: this.startDate, endDate: this.endDate, customerCode: this.customerCode, searchCondition,
       }
       this.$store.dispatch('logi/sales/searchContract', sendDate)
     },
     companyCodeClick(payload) {
       console.log('companyClick')
-      this.companyCode = payload.companyCode
+      this.customerCode = payload.customerCode
       this.searchContract('searchByCustomer')
+    },
+    searchCompanyCode() {
+      this.$store.dispatch('searchCustomerList')
     },
   },
 }
@@ -228,5 +264,31 @@ export default {
 </style>
 
 <style lang="scss">
+  .scrollStyle::-webkit-scrollbar-track
+  {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: rgba(50,60,150,1);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px rgba(50,50,150,1);
+  }
 
+  .scrollStyle::-webkit-scrollbar
+  {
+    width: 10px;
+    background-color: rgba(50,50,150,0);
+  }
+
+  .scrollStyle::-webkit-scrollbar-thumb
+  {
+    background-clip: padding-box;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    /*    background-image: -webkit-gradient(linear,
+    left bottom,
+    left top,
+    color-stop(0.44, rgb(122,153,217)),
+    color-stop(0.72, rgb(73,125,189)),
+    color-stop(0.86, rgb(28,58,148)));*/
+    background-color: #7367f0;
+  }
 </style>
