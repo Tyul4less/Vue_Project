@@ -1,45 +1,54 @@
 <template>
   <div>
-    <b-card title="HOW 직원정보 관리 ❓" v-if="hideHow!==false">
+    <b-card
+      v-if="hideHow!==false"
+      title="HOW 직원정보 관리 ❓"
+    >
       <b-card-text>직원 데이터를 누르면 상세정보를 볼 수 있게하자.</b-card-text>
       <div>
 
         <b-card-text>자세한건
-          <b-link href="https://www.google.com/" target="_blank">구글</b-link>
+          <b-link
+            href="https://www.google.com/"
+            target="_blank"
+          >
+            구글
+          </b-link>
           에게 문의하세요.
         </b-card-text>
         <b-button
-            size="sm"
-            @click="hideHow=false"
-            v-ripple.400="'rgba(234, 84, 85, 0.15)'"
-            variant="outline-danger">
+          v-ripple.400="'rgba(234, 84, 85, 0.15)'"
+          size="sm"
+          variant="outline-danger"
+          @click="hideHow=false"
+        >
           닫기
         </b-button>
       </div>
     </b-card>
     <b-row>
       <b-col
-          md="2"
-          sm="4"
-          class="my-1"
+        md="2"
+        sm="4"
+        class="my-1"
       >
         <b-form-group
-            class="mb-0"
+          class="mb-0"
         >
           <label class="d-inline-block text-sm-left mr-50">페이지 수</label>
           <b-form-select
-              id="perPageSelect"
-              v-model="perPage"
-              size="sm"
-              :options="pageOptions"
-              class="w-50"
+            id="perPageSelect"
+            v-model="perPage"
+            size="sm"
+            :options="pageOptions"
+            class="w-50"
           />
         </b-form-group>
       </b-col>
       <b-col
-          md="4"
-          sm="8"
-          class="my-1"
+        md="4"
+        sm="8"
+        class="my-1"
       >
         <b-form-group
             label="정렬"
@@ -51,10 +60,10 @@
         >
           <b-input-group size="sm">
             <b-form-select
-                id="sortBySelect"
-                v-model="sortBy"
-                :options="sortOptions"
-                class="w-75"
+              id="sortBySelect"
+              v-model="sortBy"
+              :options="sortOptions"
+              class="w-75"
             >
               <template v-slot:first>
                 <option value="">
@@ -63,10 +72,10 @@
               </template>
             </b-form-select>
             <b-form-select
-                v-model="sortDesc"
-                size="sm"
-                :disabled="!sortBy"
-                class="w-25"
+              v-model="sortDesc"
+              size="sm"
+              :disabled="!sortBy"
+              class="w-25"
             >
               <option :value="false">
                 Asc
@@ -79,8 +88,8 @@
         </b-form-group>
       </b-col>
       <b-col
-          md="6"
-          class="my-1"
+        md="6"
+        class="my-1"
       >
         <b-form-group
             label="전체 검색"
@@ -99,8 +108,8 @@
             />
             <b-input-group-append>
               <b-button
-                  :disabled="!filter"
-                  @click="filter = ''"
+                :disabled="!filter"
+                @click="filter = ''"
               >
                 Clear
               </b-button>
@@ -143,15 +152,15 @@
       </transition>
 
       <b-col
-          cols="12"
+        cols="12"
       >
         <b-pagination
-            v-model="currentPage"
-            :total-rows="totalRows"
-            :per-page="perPage"
-            align="center"
-            size="sm"
-            class="my-0"
+          v-model="currentPage"
+          :total-rows="totalRows"
+          :per-page="perPage"
+          align="center"
+          size="sm"
+          class="my-0"
         />
       </b-col>
     </b-row>
@@ -226,13 +235,13 @@ export default {
         {
           key: 'avatar', label: '사진',
         },
-        {key: 'empName', label: '이름', sortable: true},
-        {key: 'address', label: '주소', sortable: true},
-        {key: 'email', label: '이메일', sortable: true},
-        {key: 'birthDate', label: '생일', sortable: true},
-        {key: 'detailCodeName', label: '부서', sortable: true},
-        {key: 'gender', label: '성별', sortable: true},
-        {key: 'position', label: '직책'},
+        { key: 'empName', label: '이름', sortable: true },
+        { key: 'address', label: '주소', sortable: true },
+        { key: 'email', label: '이메일', sortable: true },
+        { key: 'birthDate', label: '생일', sortable: true },
+        { key: 'detailCodeName', label: '부서', sortable: true },
+        { key: 'gender', label: '성별', sortable: true },
+        { key: 'position', label: '직책' },
       ],
       items: [],
     }
@@ -242,8 +251,8 @@ export default {
     sortOptions() {
       // Create an options list from our fields
       return this.fields
-          .filter(f => f.sortable)
-          .map(f => ({text: f.label, value: f.key}))
+        .filter(f => f.sortable)
+        .map(f => ({ text: f.label, value: f.key }))
     },
   },
   beforeCreate() {
