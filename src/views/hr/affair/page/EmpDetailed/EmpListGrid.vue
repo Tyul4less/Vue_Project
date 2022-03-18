@@ -230,18 +230,15 @@ export default {
       },
       fields: [
         {
-          key: 'empCode', label: 'NO',
+          key: 'empCode', label: '고유ID',
         },
         {
           key: 'avatar', label: '사진',
         },
-        { key: 'empName', label: '이름', sortable: true },
-        { key: 'address', label: '주소', sortable: true },
-        { key: 'email', label: '이메일', sortable: true },
-        { key: 'birthDate', label: '생일', sortable: true },
-        { key: 'detailCodeName', label: '부서', sortable: true },
-        { key: 'gender', label: '성별', sortable: true },
-        { key: 'position', label: '직책' },
+        {key: 'empName', label: '이름', sortable: true},
+        {key: 'birthDate', label: '생일', sortable: true},
+        {key: 'detailCodeName', label: '부서', sortable: true},
+        {key: 'gender', label: '성별', sortable: true},
       ],
       items: [],
     }
