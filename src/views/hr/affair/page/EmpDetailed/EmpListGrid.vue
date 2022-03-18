@@ -1,11 +1,11 @@
 <template>
   <div>
     <b-card title="HOW 직원정보 관리 ❓" v-if="hideHow!==false">
-      <b-card-text>직원 데이터를 누르면 상세정보를 볼 수 있게하자.</b-card-text>
+      <b-card-text>직원목록에서 직원을 클릭하면 상세정보조회가 가능합니다.</b-card-text>
       <div>
 
         <b-card-text>자세한건
-          <b-link href="https://www.google.com/" target="_blank">구글</b-link>
+          <b-link href="https://www.google.com/" target="_blank">원장님</b-link>
           에게 문의하세요.
         </b-card-text>
         <b-button
