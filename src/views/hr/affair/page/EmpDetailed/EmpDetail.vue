@@ -160,17 +160,13 @@
   </b-card>
 </template>
 
-<script lang="ts">
-import
-{
-  BCard, BButton, BAvatar, BRow, BCol,
-} from 'bootstrap-vue'
-import {state} from '@/store/hr/affair/state.js';
-import AFFAIR from '@/store/hr/affair/action.js';
+<script>
+import {BAvatar, BButton, BCard, BCol, BRow,} from 'bootstrap-vue'
 //import { avatarText } from "@core/utils/filter.js";
-
 // typeScript 적용
 import {defineComponent} from "@vue/composition-api";
+import {mapState} from "vuex";
+import {EmpList} from "@/store/hr/affair/state";
 
 export default defineComponent({
   components: {
@@ -181,6 +177,9 @@ export default defineComponent({
       type: Object,
       required: true,
     },
+  },
+  computed:{
+    ...mapState({ empDetail : state => state.hr.emp.empDetail.empDetailInfo } ),
   },
   setup() {
     const { resolveUserRoleVariant } = useUsersList()
@@ -209,7 +208,8 @@ export default defineComponent({
   },
   methods : {
     abc(){
-      console.log(state.allEmpList);
+      console.log(this.$route.query.empCode);
+      console.log(this.empDetail);
     }
   }
 })

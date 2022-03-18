@@ -14,8 +14,11 @@ export type Mutations<S = EmpList> = {
 /////////////////////////위에꺼 안써도됨////////////////////////////////
 
 export const mutations: MutationTree<EmpList> = {
-    SET_ALL_EMP_LIST(state, payload: []){
-        state.allEmpList = payload
+    SET_ALL_EMP_LIST(state, payload: Object){
+        state.allEmpList = payload;
+    },
+    SET_EMP_DETAIL(state, payload: Object){
+        state.empDetail = payload;
     }
 
 }

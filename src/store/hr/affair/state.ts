@@ -7,6 +7,7 @@ import actions from "@/store/hr/affair/action";
 /*** VUE version 2 TYPESCRIPT 를 구현함 ***/
 export class EmpList {
     public allEmpList: object = [];
+    public empDetail: object = [];
 }
 
 
