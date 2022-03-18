@@ -51,12 +51,12 @@
         class="my-1"
       >
         <b-form-group
-          label="정렬"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          label-for="sortBySelect"
-          class="mb-0"
+            label="정렬"
+            label-cols-sm="3"
+            label-align-sm="right"
+            label-size="sm"
+            label-for="sortBySelect"
+            class="mb-0"
         >
           <b-input-group size="sm">
             <b-form-select
@@ -92,19 +92,19 @@
         class="my-1"
       >
         <b-form-group
-          label="전체 검색"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          label-for="filterInput"
-          class="mb-0"
+            label="전체 검색"
+            label-cols-sm="3"
+            label-align-sm="right"
+            label-size="sm"
+            label-for="filterInput"
+            class="mb-0"
         >
           <b-input-group size="sm">
             <b-form-input
-              id="filterInput"
-              v-model="filter"
-              type="search"
-              placeholder="검색어"
+                id="filterInput"
+                v-model="filter"
+                type="search"
+                placeholder="검색어"
             />
             <b-input-group-append>
               <b-button
@@ -121,28 +121,26 @@
       <transition class="start">
         <b-col cols="12">
           <b-table
-            striped
-            hover
-            responsive
-            :per-page="perPage"
-            :current-page="currentPage"
-            :items="items"
-            :fields="fields"
-            :sort-by.sync="sortBy"
-            :sort-desc.sync="sortDesc"
-            :sort-direction="sortDirection"
-            :filter="filter"
-            :filter-included-fields="filterOn"
-            @filtered="onFiltered"
-            @row-clicked="onRowEmpDetailRouting"
+              striped
+              hover
+              responsive
+              :per-page="perPage"
+              :current-page="currentPage"
+              :items="items"
+              :fields="fields"
+              :sort-by.sync="sortBy"
+              :sort-desc.sync="sortDesc"
+              :sort-direction="sortDirection"
+              :filter="filter"
+              :filter-included-fields="filterOn"
+              @filtered="onFiltered"
+              @row-clicked="onRowEmpDetailRouting"
           >
             <template #cell(button)="data">
-              <button @click="abc">
-                asdf
-              </button>
+              <button @click="abc">asdf</button>
             </template>
             <template #cell(avatar)="data">
-              <b-avatar :src="require(`@/assets/images/avatars/${data.item.empCode}.png`)" />
+              <b-avatar :src="require(`@/assets/images/avatars/${data.item.empCode}.png`)"/>
             </template>
             <!--                      <template #cell(status)="data">
                                     <b-badge :variant="status[1][data.value]">
@@ -187,10 +185,11 @@ import {
   BLink,
   BPagination,
   BRow,
-  BTable,
+  BTable
 } from 'bootstrap-vue'
 
-import { mapState } from 'vuex'
+import {mapState} from "vuex";
+import router from "@/router";
 
 export default {
   components: {
@@ -248,7 +247,7 @@ export default {
     }
   },
   computed: {
-    ...mapState({ empList: state => state.hr.emp.allEmpList.empList }),
+    ...mapState({ empList : state => state.hr.emp.allEmpList.empList }),
     sortOptions() {
       // Create an options list from our fields
       return this.fields
@@ -258,13 +257,13 @@ export default {
   },
   beforeCreate() {
     console.log('beforecreate')
-    this.$store.dispatch('hr/emp/GET_ALL_EMP_LIST')
+    this.$store.dispatch('hr/emp/GET_ALL_EMP_LIST');
   },
 
   mounted() {
     const timeout = setTimeout(() => {
-      this.items = this.empList
-      this.totalRows = this.empList.length
+      this.items = this.empList;
+      this.totalRows = this.empList.length;
     }, 700)
   },
 
@@ -284,12 +283,11 @@ export default {
       this.currentPage = 1
     },
     onRowEmpDetailRouting(items) {
-      console.log('clicked')
-      console.log(items)
-      console.log(items.empCode)
-      // router.push('/hr/emp-detail/')
-    },
-  },
+      this.$store.dispatch('hr/emp/GET_EMP_DETAIL',items.empCode);
+      router.push(`/hr/emp-detail/?empCode=${items.empCode}`)
+      console.log(this.$route.params);
+    }
+  }
 }
 
 </script>

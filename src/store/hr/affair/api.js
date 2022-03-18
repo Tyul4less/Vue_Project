@@ -1,8 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const getters = {
-    getAllEmp(state) {
+    GETTER_ALL_EMP_LIST(state) {
         return state.allEmpList;
     },
+    GETTER_EMP_DETAIL(state) {
+        return state.empDetail;
+    }
 };
-exports.default = getters;
+export default getters;
