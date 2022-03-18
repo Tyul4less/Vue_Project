@@ -1,14 +1,7 @@
-import { ref, watch, computed } from '@vue/composition-api'
-import store from '@/store'
-
+import { computed, ref, watch } from '@vue/composition-api'
 // Notification
-import { useToast } from 'vue-toastification/composition'
-import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default function useInvoicesList() {
-  // Use toast
-  const toast = useToast()
-
   const refInvoiceListTable = ref(null)
 
   // Table Handlers
@@ -18,7 +11,9 @@ export default function useInvoicesList() {
     { key: 'itemName', label: '품목명', sortable: true },
     { key: 'dueDateOfContract', label: '납기일', sortable: true },
     { key: 'estimateAmount', label: '견적수량', sortable: true },
-    { key: 'stockAmountUse', label: '재고사용량', sortable: true },
+    {
+      key: 'stockAmountUse', label: '재고사용량', sortable: true,
+    },
     { key: 'productionRequirement', label: '제작필요수량', sortable: true },
     { key: 'unitPriceOfContract', label: '견적단가', sortable: true },
     { key: 'sumPriceOfContract', label: '합계액', sortable: true },
@@ -53,60 +48,7 @@ export default function useInvoicesList() {
     refetchData()
   })
 
-  const fetchInvoices = (ctx, callback) => {
-    store
-      .dispatch('app-invoice/fetchInvoices', {
-        q: searchQuery.value,
-        perPage: perPage.value,
-        page: currentPage.value,
-        sortBy: sortBy.value,
-        sortDesc: isSortDirDesc.value,
-        status: statusFilter.value,
-      })
-      .then(response => {
-        const { invoices, total } = response.data
-
-        callback(invoices)
-        totalInvoices.value = total
-      })
-      .catch(() => {
-        toast({
-          component: ToastificationContent,
-          props: {
-            title: "Error fetching invoices' list",
-            icon: 'AlertTriangleIcon',
-            variant: 'danger',
-          },
-        })
-      })
-  }
-
-  // *===============================================---*
-  // *--------- UI ---------------------------------------*
-  // *===============================================---*
-
-  const resolveInvoiceStatusVariantAndIcon = status => {
-    if (status === 'Partial Payment') return { variant: 'warning', icon: 'PieChartIcon' }
-    if (status === 'Paid') return { variant: 'success', icon: 'CheckCircleIcon' }
-    if (status === 'Downloaded') return { variant: 'info', icon: 'ArrowDownCircleIcon' }
-    if (status === 'Draft') return { variant: 'primary', icon: 'SaveIcon' }
-    if (status === 'Sent') return { variant: 'secondary', icon: 'SendIcon' }
-    if (status === 'Past Due') return { variant: 'danger', icon: 'InfoIcon' }
-    return { variant: 'secondary', icon: 'XIcon' }
-  }
-
-  const resolveClientAvatarVariant = status => {
-    if (status === 'Partial Payment') return 'primary'
-    if (status === 'Paid') return 'danger'
-    if (status === 'Downloaded') return 'secondary'
-    if (status === 'Draft') return 'warning'
-    if (status === 'Sent') return 'info'
-    if (status === 'Past Due') return 'success'
-    return 'primary'
-  }
-
   return {
-    fetchInvoices,
     tableColumns,
     perPage,
     currentPage,
@@ -119,9 +61,6 @@ export default function useInvoicesList() {
     refInvoiceListTable,
 
     statusFilter,
-
-    resolveInvoiceStatusVariantAndIcon,
-    resolveClientAvatarVariant,
 
     refetchData,
   }

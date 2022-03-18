@@ -1,12 +1,11 @@
-import { selectAccountCode } from '@/api/account/base'
+import { fetchAccountCode } from '@/api/account/base'
 
 export default {
   // 전체조회
-  async FETCH_ACCOUNT_CODE({ commit }) { // 객체로 넘어오면 {}
+  async FETCH_ACCOUNT_CODE({ commit }, searchCode) { // 객체로 넘어오면 {}
     try {
-      console.log('액션')
-      const { data } = await selectAccountCode()
-      commit('SET_SILP_LIST', data.SlipList)
+      const { data } = await fetchAccountCode(searchCode)
+      commit('SET_ACCOUNTCODE_LIST', data.accoundCodeList)
       return data
     } catch (err) {
       throw new Error(err)

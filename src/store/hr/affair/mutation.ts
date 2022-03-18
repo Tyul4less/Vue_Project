@@ -5,7 +5,7 @@ import {MutationTree} from "vuex";
 /*** VUE version 2 TYPESCRIPT 를 구현함 ***/
 
 enum MutationTypes{
-    SET_ALL_EMP_LIST = "SET_ALL_EMP_LIST"
+    SET_ALL_EMP_LIST = 'SET_ALL_EMP_LIST'
 }
 
 export type Mutations<S = EmpList> = {
