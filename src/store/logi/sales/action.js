@@ -1,4 +1,6 @@
-import { searchContract, searchContractDetail } from '@/api/logi/sales'
+import {
+  searchContract, searchContractDetail, searchEstimateInContractAvailable, searchEstimateDetailInfo,
+} from '@/api/logi/sales'
 
 export default {
   async searchContract({ commit }, date) {
@@ -26,5 +28,43 @@ export default {
   },
   setTable({ commit }, tableColumns) {
     commit('setTable', tableColumns)
+  },
+  async addNewContract({ commit }, contractNo) {
+    console.log(contractNo)
+    try {
+      return
+      const res = await searchContractDetail(contractNo)
+      const gridRow = res.data.gridRowJson
+      commit('searchContractDetail', gridRow)
+
+      // return res
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
+  async searchEstimateInContractAvailable({ commit }, sendDate) {
+    console.log(sendDate)
+    try {
+      const res = await searchEstimateInContractAvailable(sendDate)
+      const gridRow = res.data.gridRowJson
+      console.log(gridRow)
+      commit('searchEstimateInContractAvailable', gridRow)
+
+      // return res
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
+  async searchEstimateDetailInfo({ commit }, estimateNo) {
+    try {
+      const res = await searchEstimateDetailInfo(estimateNo)
+      const gridRow = res.data.gridRowJson
+      console.log(gridRow)
+      commit('searchEstimateDetailInfo', gridRow)
+
+      // return res
+    } catch (err) {
+      throw new Error(err)
+    }
   },
 }

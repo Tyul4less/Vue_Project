@@ -3,7 +3,7 @@ const salesRoute = [
   {
     path: `${ERP}/contractInfo`,
     name: 'contractInfo',
-    component: () => import('@/views/logistic/sales/contract/contractInfo/contractInfo'),
+    component: () => import('@/views/logistic/sales/contract/contractInfo'),
     meta: {
       pageTitle: '수주 조회',
       breadcrumb: [
@@ -23,7 +23,7 @@ const salesRoute = [
   {
     path: `${ERP}/registContract`,
     name: 'registContract',
-    component: () => import('@/views/logistic/sales/contract/registContract/contractRegist'),
+    component: () => import('@/views/logistic/sales/contract/contractRegist'),
     meta: {
       pageTitle: '수주 등록',
       breadcrumb: [
