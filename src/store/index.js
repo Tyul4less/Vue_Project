@@ -9,7 +9,7 @@ import verticalMenu from './vertical-menu'
 import account from './account'
 import hr from './hr'
 import logi from './logi'
-
+import common from './common'
 import auth from './auth'
 
 Vue.use(Vuex)
@@ -23,6 +23,7 @@ export default new Vuex.Store({
     hr,
     logi,
     auth,
+    common,
   },
   mutations: {
     changeTab(state, payload) {

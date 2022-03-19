@@ -1,4 +1,6 @@
 import router from '@/router/index'
+import production from '@/store/logi/production/state'
+import sales from './sales/state'
 
 export default {
   namespaced: true,
@@ -8,5 +10,8 @@ export default {
   getters: {
   },
   mutations: {
+  },
+  modules: {
+    sales, production
   },
 }

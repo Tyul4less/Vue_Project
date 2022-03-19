@@ -48,6 +48,10 @@ const insaRouter = [
           text: '직원정보 관리',
         },
         {
+          text: '직원 목록조회',
+          to : `${ERP}/emp-page/`
+        },
+        {
           text: '직원 상세조회',
           active: true,
         },
