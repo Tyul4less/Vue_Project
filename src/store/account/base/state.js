@@ -4,8 +4,9 @@ import actions from './action'
 export default {
   namespaced: true,
   state: {
-    accountCode: [],
-
+    accoundCodeList: [],
+    accountCustomerList: [],
+    accountControllCodeList: [],
   },
   getters: {
   },

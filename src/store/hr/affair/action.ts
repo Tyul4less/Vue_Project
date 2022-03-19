@@ -12,6 +12,7 @@ const FetchAxiosEmp: AxiosInstance =
         },
     })
 
+
 const actions: ActionTree<EmpList, Object> = {
     GET_ALL_EMP_LIST(state: ActionContext<EmpList, Object>){
     FetchAxiosEmp.get("/hr/affair/empList")
@@ -32,6 +33,7 @@ const actions: ActionTree<EmpList, Object> = {
 
 
 /*class AFFAIR { // AFFAIR.GET_ALL_EMP_LIST(); 로 불러올 수 있음 (클래스+함수형 으로 해버리면 모듈화가 힘들다)
+class AFFAIR { // AFFAIR.GET_ALL_EMP_LIST(); 로 불러올 수 있음
     GET_ALL_EMP_LIST() {
         console.log('액션')
         // import and DispatchHrEmp.getAll();

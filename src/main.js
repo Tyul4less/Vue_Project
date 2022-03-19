@@ -4,6 +4,8 @@ import {
 } from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
 
+import Vuex from 'vuex'
+
 import router from './router'
 import store from './store'
 import App from './App.vue'
@@ -20,6 +22,9 @@ import '@/libs/sweet-alerts'
 // v필터
 import { formatDate } from './utils/filters'
 // BSV Plugin Registration
+Vue.use(ToastPlugin)
+Vue.use(ModalPlugin)
+
 Vue.use(ToastPlugin) // alert창
 Vue.use(ModalPlugin) // 모달
 
@@ -38,5 +43,6 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  Vuex,
   render: h => h(App),
 }).$mount('#app')

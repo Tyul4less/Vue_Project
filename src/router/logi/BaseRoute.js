@@ -28,5 +28,20 @@ const logiRouter = [
       ],
     },
   },
+  {
+    path: `${ERP}/home`,
+    name: 'logiHome',
+    component: () => import('@/views/logistic/Home.vue'),
+    meta: {
+      pageTitle: 'LOGI',
+      breadcrumb: [
+        {
+          text: 'LOGI Home',
+          active: true,
+        },
+      ],
+    },
+  },
+
 ]
 export default logiRouter

@@ -6,7 +6,8 @@ export default [
     children: [
       {
         title: '주생산계획 (MPS)',
-        // route: '',
+        route: 'mps',
+
       },
       {
         title: '소요량 전개/취합 (MRP)',
@@ -19,5 +20,4 @@ export default [
       },
     ],
   },
-
 ]

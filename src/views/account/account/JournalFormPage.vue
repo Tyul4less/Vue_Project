@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import JournalForm from '@/components/account/account/Journal/JournalForm.vue'
+import JournalForm from '@/../../../../../project/VueERP/src/components/account/account/Journal/JournalForm.vue'
 
 export default {
   components: {

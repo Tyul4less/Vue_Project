@@ -1,9 +1,19 @@
 const ERP = '/logi'
 const salesRoute = [
   {
+    path: '/logi/sales/EstimateInfo',
+    name: 'EstimateInfo',
+    component: () => import('@/views/logistic/sales/Estimate/EstimateInfo.vue'),
+  },
+  {
+    path: '/logi/sales/EstimateRegiste',
+    name: 'EstimateRegiste',
+    component: () => import('@/views/logistic/sales/Estimate/EstimateRegiste.vue'),
+  },
+  {
     path: `${ERP}/contractInfo`,
     name: 'contractInfo',
-    component: () => import('@/views/logistic/sales/contract/contractInfo/contractInfo'),
+    component: () => import('@/views/logistic/sales/contract/contractInfo'),
     meta: {
       pageTitle: '수주 조회',
       breadcrumb: [
@@ -23,7 +33,7 @@ const salesRoute = [
   {
     path: `${ERP}/registContract`,
     name: 'registContract',
-    component: () => import('@/views/logistic/sales/contract/registContract/contractRegist'),
+    component: () => import('@/views/logistic/sales/contract/contractRegist'),
     meta: {
       pageTitle: '수주 등록',
       breadcrumb: [
