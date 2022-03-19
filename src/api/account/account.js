@@ -2,7 +2,7 @@
 
 import { accountApi } from '../index'
 
-// 전체조회
+// 전체조회 완료
 function selectSlips() {
   return accountApi.get('/account/slips')
 }
@@ -20,5 +20,16 @@ function deleteSlip(slipList) {
     },
   })
 }
+// 추가
+function registerSlip(slip) {
+  console.log(`api${slip}`)
+  return accountApi.post('/account/slips', slip)
+}
+function editSlip(slip) {
+  console.log(`api${slip}`)
+  return accountApi.put('/account/slips', slip)
+}
 
-export { selectSlips, selectSlip, deleteSlip }
+export {
+  selectSlips, selectSlip, deleteSlip, registerSlip, editSlip,
+}

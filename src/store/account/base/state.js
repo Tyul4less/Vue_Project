@@ -5,7 +5,8 @@ export default {
   namespaced: true,
   state: {
     accoundCodeList: [],
-
+    accountCustomerList: [],
+    accountControllCodeList: [],
   },
   getters: {
   },

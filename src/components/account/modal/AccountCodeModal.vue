@@ -23,8 +23,11 @@
     <b-table
       striped
       hover
+      select-mode="single"
+      selectable
       :fields="fields"
       :items="accoundCodeList"
+      @row-selected="onRowSelected"
     />
   </div>
 
@@ -61,30 +64,33 @@ export default {
   beforeDestroy() {
     this.CLEAR_CODE_LIST()
   },
-  created() {
-    console.log(this.condition)
-  },
   methods: {
     ...mapMutations('account/base', ['CLEAR_CODE_LIST']),
     ...mapActions('account/base', ['FETCH_ACCOUNT_CODE']),
 
-    async searchCode() {
+    // 검색버튼
+    searchCode() {
       if (this.condition === 'accountCode') {
         const searchCode = {
           accountCode: this.searchAccountCode,
           accountName: 'undefined',
         }
-        const { accoundCodeList } = await this.FETCH_ACCOUNT_CODE(searchCode)
-        const { accountCode } = accoundCodeList[0]
-        this.$emit('input', accountCode)
+        this.FETCH_ACCOUNT_CODE(searchCode)
       } else {
-        console.log(this.searchAccountName)
         const searchCode = {
           accountCode: 'undefined',
           accountName: this.searchAccountName,
         }
-        const { accoundCodeList } = await this.FETCH_ACCOUNT_CODE(searchCode)
-        const { accountName } = accoundCodeList[0]
+        this.FETCH_ACCOUNT_CODE(searchCode)
+      }
+    },
+    // 선택된 로우
+    onRowSelected(selectedItem) {
+      if (this.condition === 'accountCode') {
+        const { accountCode } = selectedItem[0]
+        this.$emit('input', accountCode)
+      } else {
+        const { accountName } = selectedItem[0]
         this.$emit('input', accountName)
       }
     },
