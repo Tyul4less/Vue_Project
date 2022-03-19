@@ -12,6 +12,14 @@ function fetchAccountCode(searchCode) {
       },
     })
 }
-// 한개조회
+// 고객사조회
+function fetchAccountCustomerCode() {
+  return accountApi.get('/base/customers')
+}
 
-export { fetchAccountCode }
+// 분개상세코드 조회
+function fetchAccountControllCode() {
+  return accountApi.get('/base/accountControllerCodes')
+}
+
+export { fetchAccountCode, fetchAccountCustomerCode, fetchAccountControllCode }
