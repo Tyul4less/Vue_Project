@@ -15,7 +15,23 @@
         </b-alert>
       </div>
     </template>
+    <b-card title="HOW 상세정보 관리 😎" v-if="hideHow!==false && isEmployeeData!==false">
+      <b-card-text>이 항목에서는 수정화면 이동 및 직원 삭제가 가능합니다.</b-card-text>
+      <div>
 
+        <b-card-text>자세한건
+          <b-link href="https://www.google.com/" target="_blank">원장님</b-link>
+          에게 문의하세요.
+        </b-card-text>
+        <b-button
+            size="sm"
+            @click="hideHow=false"
+            v-ripple.400="'rgba(234, 84, 85, 0.15)'"
+            variant="outline-danger">
+          닫기
+        </b-button>
+      </div>
+    </b-card>
     <b-card v-if="isEmployeeData">
       <b-row>
         <!-- User Info: Left col -->
@@ -54,8 +70,10 @@
                   Edit
                 </b-button>
                 <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
                     variant="outline-danger"
                     class="ml-1"
+                    @click="deleteConfirmButton"
                 >
                   Delete
                 </b-button>
@@ -217,19 +235,22 @@
         </b-col>
       </b-row>
     </b-card>
-
   </div>
 </template>
 
 <script>
-import {BAvatar, BButton, BCard, BCol, BRow, BAlert,} from 'bootstrap-vue'
+import {BAlert, BAvatar, BButton, BCard, BCol, BImg, BLink, BRow} from 'bootstrap-vue'
 import {defineComponent} from "@vue/composition-api";
 import {mapState} from "vuex";
-import Vue from 'vue';
+import Ripple from 'vue-ripple-directive'
+import 'swiper/css/swiper.css'
 
 export default defineComponent({
   components: {
-    BCard, BButton, BRow, BCol, BAvatar, BAlert,
+    BCard, BButton, BRow, BCol, BAvatar, BAlert,BImg , BLink,
+  },
+  directive : {
+    Ripple,
   },
   computed: {
     ...mapState({
@@ -244,9 +265,50 @@ export default defineComponent({
       isEmployeeData: false,
       empBasic: {},
       salary: 50,
+      hideHow: false,
     }
   },
   methods: {
+
+    deleteConfirmButton() {
+      this.$swal({
+        title: '정말 삭제하시겠습니까?',
+        text: "삭제요청이 완료되면 더 이상 복구가 안됩니다.",
+        icon: 'warning',
+        background : 'rgba(35, 39, 87, 0.91)',
+        showCancelButton: true,
+        confirmButtonText: '예',
+        cancelButtonText: '아니요',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+          cancelButton: 'btn btn-outline-danger ml-1',
+        },
+        buttonsStyling: false,
+      }).then(result => {
+        if (result.value) {
+          this.$swal({
+            icon: 'success',
+            background : 'rgba(35, 39, 87, 0.91)',
+            title: '삭제완료',
+            text: '해당 사원의 정보가 삭제되었습니다.',
+            customClass: {
+              confirmButton: 'btn btn-success',
+            },
+          })
+          this.$router.push('/hr/emp-page');
+        } else if (result.dismiss === 'cancel') {
+          this.$swal({
+            title: '취소됨',
+            text: '사원정보가 안전하게 보관되었습니다.',
+            icon: 'error',
+            background : 'rgba(35, 39, 87, 0.91)',
+            customClass: {
+              confirmButton: 'btn btn-success',
+            },
+          })
+        }
+      })
+    },
 
     abc() {
       const te = TypeError
@@ -276,11 +338,14 @@ export default defineComponent({
       this.empBasic = emp;
       this.empBasic[0].empName; // 3번째 error 어거지로 잡기
 
-      if (emp === undefined)
+      if (emp === undefined) {
         this.isEmployeeData = false;
-      else
+        this.hideHow = false;
+      }
+      else {
         this.isEmployeeData = true;
-
+        this.hideHow = true;
+      }
     } catch (e) {
       console.log(e + ' HOO : TYPE ERROR of FILTER');
       this.showAlert();
