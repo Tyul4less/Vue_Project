@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="custom-search">
-      <MenuSlipForm @deleteItem="deleteSlip" />
+
       <!-- advance search input -->
       <b-row>
         <b-col md="4">
@@ -42,9 +42,10 @@
 
     <!-- table -->
     <vue-good-table
+      ref="myTable"
       :columns="columns"
       :rows="slipFormList"
-      :rtl="direction"
+
       :search-options="{
         enabled: true,
         externalQuery: searchTerm }"
@@ -52,18 +53,33 @@
         enabled: true,
         selectOnCheckboxOnly: true, // only select when checkbox is clicked instead of the row
         selectionInfoClass: 'custom-class',
-        selectionText: 'rows selected',
+        selectionText: '개가 선택되었습니다',
         clearSelectionText: 'clear',
-        disableSelectInfo: true, // disable the select info panel on top
+        disableSelectInfo: false, // disable the select info panel on top
         selectAllByGroup: true, // when used in combination with a grouped table, add a checkbox in the header row to check/uncheck the entire group
       }"
       :pagination-options="{
         enabled: true,
         perPage:pageLength
       }"
-      theme="my-theme"
-      @on-row-click="onRowClick"
+      theme="black-rhino"
+      @on-selected-rows-change="selectionChanged"
     >
+      <!--선택시 나오게-->
+      <div slot="selected-row-actions">
+        <button @click="showJournalForm">
+          해당 전표상세보기
+        </button>
+      </div>
+      <!--테이블안에 버튼넣기 -->
+      <div slot="table-actions">
+        <MenuSlipForm
+          :active-button="activeButton"
+          @deleteItem="deleteSlip"
+          @editItem="editSlip"
+        />
+      </div>
+
       <template
         slot="table-row"
         slot-scope="props"
@@ -131,6 +147,7 @@
         </div>
       </template>
     </vue-good-table>
+    <!-- 로딩중-->
 
   </div>
 </template>
@@ -140,10 +157,9 @@ import MenuSlipForm from '@/components/account/account/Slip/MenuSlipForm.vue'
 import {
   BAvatar, BPagination, BFormGroup, BFormInput, BFormSelect, BRow, BCol,
 } from 'bootstrap-vue'
-import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
+import ToastificationContent from '../../../../../../../VueERP-dev/src/@core/components/toastification/ToastificationContent.vue'
 import { VueGoodTable } from 'vue-good-table'
-import store from '@/store/index'
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Vue from 'vue'
 
 export default {
@@ -164,10 +180,9 @@ export default {
 
   data() {
     return {
-
+      activeButton: 'searchSlip',
+      buttonCondition: '',
       pageLength: 10,
-      dir: false,
-
       columns: [
         {
           label: '전표일련번호',
@@ -192,54 +207,77 @@ export default {
       ],
       rows: [],
       searchTerm: '',
+      selectedArray: [],
       deleteItem: [],
+      editeItem: [],
       logMessage: '',
+
     }
   },
   computed: {
     ...mapState('account/account', ['slipFormList']),
 
-    direction() {
-      if (store.state.appConfig.isRTL) {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.dir = true
-        return this.dir
-      }
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.dir = false
-      return this.dir
-    },
   },
   created() {
-    console.log(store)
-    store.dispatch('account/account/FETCH_ALL_SLIP')
+    /**
+     * 리엑트의 useEffect와 같음
+     */
+    this.FETCH_ALL_SLIP()
   },
   methods: {
+    // 액션을 가져옴
+    ...mapActions('account/account', ['FETCH_ALL_SLIP', 'DELETE_SLIP']),
+    // 검색
     advanceSearch(val) {
       this.searchTerm = val
     },
-
-    onRowClick(params) {
-      const newSlipNo = params.row.slipNo
-      const index = this.deleteItem.findIndex(v => v.slipNo === newSlipNo)
-
-      if (index < 0) {
-        this.deleteItem.push({ slipNo: newSlipNo })
+    /**
+    * 선택된 전표(체크박스)
+    * 승인과 미결된 전표는 수정 삭제가 안된다.
+    */
+    selectionChanged(params) {
+      const selectedSlip = params.selectedRows.map(v => v.slipStatus)
+      if (selectedSlip.includes('승인') || selectedSlip.includes('미결')) {
+        Vue.$toast.info('승인 or 미결된 전표는 수정이 불가합니다')
       } else {
-        this.deleteItem.splice(index, 1)
+        this.selectedArray = params.selectedRows.map(v => ({ slipNo: v.slipNo }))
+        this.deleteItem = this.selectedArray
+        this.editeItem = this.selectedArray
       }
     },
 
+    /**
+     * 전표삭제버튼
+     */
     async deleteSlip() {
-      const response = await store.dispatch('account/account/DELETE_SLIP', this.deleteItem)
-      console.log(response)
-      this.logMessage = response.data.errorMsg
-      Vue.$toast.success(this.logMessage)
-      store.dispatch('account/account/FETCH_ALL_SLIP')
+      if (!this.deleteItem.length) {
+        Vue.$toast.info('승인된 전표는 삭제가 불가합니다')
+        return
+      }
+      const response = await this.DELETE_SLIP(this.deleteItem)
+      Vue.$toast.success(response.data.errorMsg)
+      this.FETCH_ALL_SLIP()
+    },
+    /**
+    * 전표수정버튼
+    */
+    async editSlip() {
+      const selectedSlip = this.selectedArray[0].slipNo
+      console.log(selectedSlip)
+      this.$router.push({ name: 'journalForm', params: { selectedSlip } })
+    },
+
+    /**
+     * 전표상세보기버튼
+     */
+    showJournalForm() {
+      const selectedSlip = this.$refs.myTable.selectedRows.map(v => v.slipNo)[0]
+      if (this.$refs.myTable.selectedRows.length > 1) {
+        Vue.$toast.info('한개만 선택해주세요')
+      } else {
+        this.$router.push({ name: 'journalForm', params: { selectedSlip } })
+      }
     },
   },
 }
 </script>
-<style lang="scss" scoped>
-
-</style>

@@ -5,6 +5,15 @@ export default {
   namespaced: true,
   state: {
     slipFormList: [],
+    slipForm: {},
+  },
+  getters: {
+    GET_SELETED_SLIP(state) {
+      return Array.of(state.slipForm)
+    },
+    GET_SELETED_JOURNALlIST(state) {
+      return state.slipForm?.journalList
+    },
   },
 
   mutations,

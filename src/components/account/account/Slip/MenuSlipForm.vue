@@ -3,13 +3,33 @@
   <b-button-toolbar aria-label="Toolbar with button groups and dropdown menu">
     <b-button-group>
       <b-button
+        v-show="activeButton==='addSlip'"
         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+        v-b-modal.openAddSlipModal
         variant="primary"
-        @click="addSlim"
+        :disabled="addBtStatus"
       >
         전표추가
       </b-button>
       <b-button
+        v-if="activeButton==='addSlip'"
+        v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+        v-b-modal.openAddJounalModal
+        :disabled="!addBtStatus || addJournalBt"
+        variant="primary"
+      >
+        분개추가
+      </b-button>
+      <b-button
+        v-show="activeButton==='searchSlip'"
+        v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+        variant="primary"
+        @click="changeAddFormPage"
+      >
+        전표추가
+      </b-button>
+      <b-button
+        v-if="activeButton==='searchSlip'"
         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
         variant="primary"
         @click="$emit('deleteItem')"
@@ -17,35 +37,19 @@
         전표삭제
       </b-button>
       <b-button
+        v-if="activeButton==='searchSlip'"
         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
         variant="primary"
+        @click="$emit('editItem')"
       >
-        전표저장
-      </b-button>
-    </b-button-group>
-    <b-dropdown
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      class="mx-1"
-      right
-      text="menu"
-      variant="primary"
-    >
-      <b-dropdown-item>전표</b-dropdown-item>
-      <b-dropdown-item>분개</b-dropdown-item>
-      <b-dropdown-item>분개상세</b-dropdown-item>
-    </b-dropdown>
-    <b-button-group>
-      <b-button
-        v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-        variant="primary"
-      >
-        승인
+        전표수정
       </b-button>
       <b-button
         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
         variant="primary"
-      >
-        취소
+        style=" float: right"
+        @click="$emit('submitResult')"
+      >저장
       </b-button>
     </b-button-group>
   </b-button-toolbar>
@@ -53,7 +57,7 @@
 
 <script>
 import {
-  BButtonToolbar, BButtonGroup, BButton, BDropdown, BDropdownItem,
+  BButtonToolbar, BButtonGroup, BButton,
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 
@@ -62,15 +66,17 @@ export default {
     BButtonToolbar,
     BButtonGroup,
     BButton,
-    BDropdown,
-    BDropdownItem,
+
   },
   directives: {
     Ripple,
   },
+  props: ['activeButton', 'addBtStatus', 'addJournalBt'],
+
   methods: {
-    addSlim() {
-      this.$router.push('/acc/account/addSlipForm')
+
+    changeAddFormPage() {
+      this.$router.push({ name: 'addSlipForm' })
     },
 
   },

@@ -1,6 +1,19 @@
-import { searchEstimateInfo } from '@/api/logi/sales'
+import {
+  searchEstimateInfo, searchContract, searchContractDetail, searchEstimateInContractAvailable, searchEstimateDetailInfo,
+} from '@/api/logi/sales'
 
 export default {
+  async searchContract({ commit }, date) {
+    try {
+      const res = await searchContract(date)
+      const gridRow = res.data.gridRowJson
+      commit('searchContract', gridRow)
+
+      // return res
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
   async SEARCH_ESTIMATE_INFO({ commit }, payload) { // 객체로 넘어오면 {}
     // console.log("오나")
     // console.log(payload)
@@ -10,18 +23,62 @@ export default {
       console.log(data.gridRowJson[0])
       commit('SEARCH_INFO', data.gridRowJson) /* field가 맵핑하는게 배열이기 때문에 그대로 보내줌 */
       return data
+      } catch (err) {
+      throw new Error(err)
+    }
+  },
+
+  async searchContractDetail({ commit }, contractNo) {
+    console.log(contractNo)
+    try {
+      const res = await searchContractDetail(contractNo)
+      const gridRow = res.data.gridRowJson
+      commit('searchContractDetail', gridRow)
+
+      // return res
     } catch (err) {
       throw new Error(err)
     }
   },
-  /* async DELETE_SLIP(_, slipList) { // 객체로 넘어오면 {}
+  setTable({ commit }, tableColumns) {
+    commit('setTable', tableColumns)
+  },
+  async addNewContract({ commit }, contractNo) {
+    console.log(contractNo)
     try {
-      const response = await deleteSlip(slipList)
-      console.log(1)
-      return response
+      return
+      const res = await searchContractDetail(contractNo)
+      const gridRow = res.data.gridRowJson
+      commit('searchContractDetail', gridRow)
+
+      // return res
     } catch (err) {
       throw new Error(err)
     }
-  }, */
+  },
+  async searchEstimateInContractAvailable({ commit }, sendDate) {
+    console.log(sendDate)
+    try {
+      const res = await searchEstimateInContractAvailable(sendDate)
+      const gridRow = res.data.gridRowJson
+      console.log(gridRow)
+      commit('searchEstimateInContractAvailable', gridRow)
 
+      // return res
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
+  async searchEstimateDetailInfo({ commit }, estimateNo) {
+    try {
+      const res = await searchEstimateDetailInfo(estimateNo)
+      const gridRow = res.data.gridRowJson
+      console.log(gridRow)
+      commit('searchEstimateDetailInfo', gridRow)
+
+      // return res
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
 }

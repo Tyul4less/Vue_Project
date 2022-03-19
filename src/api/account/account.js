@@ -2,9 +2,13 @@
 
 import { accountApi } from '../index'
 
-// 조회
-function selectSlip() {
+// 전체조회 완료
+function selectSlips() {
   return accountApi.get('/account/slips')
+}
+// 한개조회
+function selectSlip(slipNo) {
+  return accountApi.get(`/account/slips/${slipNo}`)
 }
 // 삭제
 // data속성을 추가안해주면 404오류뜬다!!! 주의
@@ -16,5 +20,16 @@ function deleteSlip(slipList) {
     },
   })
 }
+// 추가
+function registerSlip(slip) {
+  console.log(`api${slip}`)
+  return accountApi.post('/account/slips', slip)
+}
+function editSlip(slip) {
+  console.log(`api${slip}`)
+  return accountApi.put('/account/slips', slip)
+}
 
-export { selectSlip, deleteSlip }
+export {
+  selectSlips, selectSlip, deleteSlip, registerSlip, editSlip,
+}

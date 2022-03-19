@@ -31,7 +31,8 @@
                 />
               </span>
               <h2 class="brand-text">
-                {{ appName }}
+                6대원전자9
+<!--                {{ appName }}-->
               </h2>
             </b-link>
           </li>
@@ -72,6 +73,7 @@
       @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
     >
       <vertical-nav-menu-items
+              style="font-family: '배달의민족 도현'"
         :items="ERPMenu"
         class="navigation navigation-main"
       />

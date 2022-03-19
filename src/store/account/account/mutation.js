@@ -2,8 +2,11 @@
 
 export default {
 
-  SET_SILP(state, slipFormList) {
+  SET_SILP_LIST(state, slipFormList) {
     state.slipFormList = slipFormList
+  },
+  SET_SILP(state, slipForm) {
+    state.slipForm = slipForm
   },
 
 }

@@ -10,7 +10,7 @@
       cols="12"
       md="9"
     >
-      <b-row class="breadcrumbs-top">
+      <b-row class="breadcrumbs-top" style="font-family: '배달의민족 도현'">
         <b-col cols="12">
           <h2 class="content-header-title float-left pr-1 mb-0">
             {{ $route.meta.pageTitle }}

@@ -1,18 +1,16 @@
 <template>
   <div>
-    <JournalForm />
+    <!-- <JournalForm /> -->
     <AddSlipForm />
   </div>
 
 </template>
 <script>
-import AddSlipForm from '@/components/account/account/Slip/AddSlipForm.vue'
-import JournalForm from '@/components/account/account/JournalForm/JournalForm.vue'
+import AddSlipForm from '@/../../../../../project/VueERP/src/components/account/account/Slip/AddSlipForm.vue'
 
 export default {
   components: {
     AddSlipForm,
-    JournalForm,
 
   },
 

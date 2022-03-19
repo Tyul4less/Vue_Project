@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 // import AccountRoute from './account/AccountRoute'
 
 import baseRoute from './hr/BaseRoute'
-import logiRouter from './logi/BaseRoute'
+import logiRouter from './logi'
 import accountRouter from './account/BaseRoute'
 import salesRoute from '@/router/logi/SalesRoute'
 
