@@ -2,6 +2,8 @@ import Vue from 'vue'
 import { ToastPlugin, ModalPlugin } from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
 
+import Vuex from 'vuex'
+
 import router from './router'
 import store from './store'
 import App from './App.vue'
@@ -21,6 +23,8 @@ import { formatDate } from './utils/filters'
 Vue.use(ToastPlugin)
 Vue.use(ModalPlugin)
 
+Vue.use(Vuex)
+
 // Composition API
 Vue.use(VueCompositionAPI)
 // 필터등록
@@ -36,5 +40,6 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  Vuex,
   render: h => h(App),
 }).$mount('#app')

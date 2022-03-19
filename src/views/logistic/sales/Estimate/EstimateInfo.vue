@@ -1,19 +1,20 @@
 <template>
   <div>
-    <estimate-infotable1></estimate-infotable1>
-    <estimate-info-table2></estimate-info-table2>
+    <estimate-info-table></estimate-info-table>
+    <hr/>
+    <estimate-info-detail></estimate-info-detail>
   </div>
 </template>
 
 <script>
-// eslint-disable-next-line import/no-absolute-path,import/no-unresolved
-import estimateInfotable1  from '/src/components/logistic/sales/estimate/EstimateInfoTable1.vue';
-import estimateInfoTable2 from '@/components/logistic/sales/estimate/EstimateInfoTable2'
+// eslint-disable-next-line import/extensions
+import EstimateInfoDetail from '@/components/logistic/sales/estimate/EstimateInfoDetail.vue'
+import EstimateInfoTable from '@/components/logistic/sales/estimate/EstimateInfoTable'
 
 export default {
   components: {
-    estimateInfotable1,
-    estimateInfoTable2,
+    EstimateInfoTable,
+    EstimateInfoDetail,
   },
 }
 </script>
