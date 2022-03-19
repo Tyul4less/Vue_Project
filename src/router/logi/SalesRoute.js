@@ -1,6 +1,16 @@
 const ERP = '/logi'
 const salesRoute = [
   {
+    path: '/logi/sales/EstimateInfo',
+    name: 'EstimateInfo',
+    component: () => import('@/views/logistic/sales/Estimate/EstimateInfo.vue'),
+  },
+  {
+    path: '/logi/sales/EstimateRegiste',
+    name: 'EstimateRegiste',
+    component: () => import('@/views/logistic/sales/Estimate/EstimateRegiste.vue'),
+  },
+  {
     path: `${ERP}/contractInfo`,
     name: 'contractInfo',
     component: () => import('@/views/logistic/sales/contract/contractInfo'),

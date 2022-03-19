@@ -1,4 +1,10 @@
 export default {
+  
+  SEARCH_INFO(state, estimateList) {
+    state.estimateList = estimateList
+    console.log('뮤테이션'+JSON.stringify(state.estimateList))
+  },
+  
   searchContract(state, gridRow) {
     state.detailGrid = []
     state.grid = gridRow

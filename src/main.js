@@ -4,6 +4,8 @@ import {
 } from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
 
+import Vuex from 'vuex'
+
 import router from './router'
 import store from './store'
 import App from './App.vue'
@@ -41,5 +43,6 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  Vuex,
   render: h => h(App),
 }).$mount('#app')

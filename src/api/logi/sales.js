@@ -2,6 +2,23 @@
 
 import { logiApi } from '../index'
 
+
+// 조회
+function searchEstimateInfo(payload) {
+  const {
+    startDate,
+    endDate,
+    dateSearchCondition,
+  } = payload
+  return logiApi.get('/sales/searchEstimates', {
+    params : {
+      startDate,
+      endDate,
+      dateSearchCondition,
+    },
+  })
+}
+
 function searchContract(date) {
   const {
     startDate, endDate, customerCode, searchCondition,
@@ -40,5 +57,5 @@ function searchEstimateDetailInfo(estimateNo) {
 }
 
 export {
-  searchContract, searchContractDetail, searchEstimateInContractAvailable, searchEstimateDetailInfo,
+  searchEstimateInfo, searchContract, searchContractDetail, searchEstimateInContractAvailable, searchEstimateDetailInfo,
 }
