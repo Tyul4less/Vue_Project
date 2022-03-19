@@ -1,15 +1,23 @@
 import { $themeConfig } from '@themeConfig'
 import router from '@/router/index'
 import company from './company/state'
+import emp from './affair/state'
+import mutations from "@/store/hr/affair/mutation";
 
 export default {
   namespaced: true,
+  modules: {
+    emp
+  },
   state: {
-    connect: true,
+    connect: false,
   },
   getters: {
   },
-  mutations: {
+
+  mutations
+
+/*  mutations: {
     login(state) {
       state.connect = true
       console.log('뮤테이션')
@@ -19,4 +27,5 @@ export default {
   modules: {
     company,
   },
+  },*/
 }
