@@ -1,10 +1,8 @@
 import sales from './sales/state'
+import production from './production/state'
 
 export default {
   namespaced: true,
-  modules: {
-    sales,
-  },
   state: {
     connect: false,
   },
@@ -15,6 +13,6 @@ export default {
   mutations: {
   },
   modules: {
-    sales, production
+    sales, production,
   },
 }

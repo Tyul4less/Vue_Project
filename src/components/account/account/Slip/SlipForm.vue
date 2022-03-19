@@ -157,7 +157,7 @@ import MenuSlipForm from '@/components/account/account/Slip/MenuSlipForm.vue'
 import {
   BAvatar, BPagination, BFormGroup, BFormInput, BFormSelect, BRow, BCol,
 } from 'bootstrap-vue'
-import ToastificationContent from '../../../../../../../VueERP-dev/src/@core/components/toastification/ToastificationContent.vue'
+import ToastificationContent from '@/@core/components/toastification/ToastificationContent.vue'
 import { VueGoodTable } from 'vue-good-table'
 import { mapActions, mapState } from 'vuex'
 import Vue from 'vue'

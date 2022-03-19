@@ -4,7 +4,7 @@ import actions from './action'
 export default {
   namespaced: true,
   state: {
-  estimateList: []
+    estimateList: [],
     grid: [],
     detailGrid: [],
     tableColumns: [],
@@ -14,7 +14,7 @@ export default {
   },
 
   mutations,
-    
+
   actions,
 
 }

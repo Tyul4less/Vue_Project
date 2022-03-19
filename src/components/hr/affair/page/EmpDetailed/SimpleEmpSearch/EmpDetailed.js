@@ -1,23 +1,19 @@
-//**************************************** 2020-11-20 권은비 시작 ****************************************
-import React, { useEffect } from "react";
+//* *************************************** 2020-11-20 권은비 시작 ****************************************
+import React, { useEffect } from 'react'
 
-
-import EmpDetailedSearch from './EmpDetailedSearch';
-import EmpDetailedInfo from '../DetailEmpSearch/EmpDetailedInfo';
 import {
   Grid,
   AppBar,
   Toolbar,
-  Typography
-} from "@material-ui/core";
-import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-material.css";
+  Typography,
+} from '@material-ui/core'
+import EmpDetailedSearch from './EmpDetailedSearch'
+import EmpDetailedInfo from '../DetailEmpSearch/EmpDetailedInfo'
+import 'ag-grid-community/dist/styles/ag-grid.css'
+import 'ag-grid-community/dist/styles/ag-theme-material.css'
 
-//상세정보 조회할떄 empCode넘겨주기위해 dispatch
-const EmpDetailed = props => {
- 
-
-  return (
+// 상세정보 조회할떄 empCode넘겨주기위해 dispatch
+const EmpDetailed = props => (
     <>
       <AppBar position="relative">
         <Toolbar>
@@ -25,7 +21,7 @@ const EmpDetailed = props => {
         </Toolbar>
       </AppBar>
       <Grid container spacing={1}>
-        <Grid item xs={12} sm={4}  >
+        <Grid item xs={12} sm={4} >
           <EmpDetailedSearch />
         </Grid>
         <Grid item xs={12} sm={8}>
@@ -33,19 +29,13 @@ const EmpDetailed = props => {
         </Grid>
       </Grid>
     </>
-  );
-};
+)
 
-export default EmpDetailed;
+export default EmpDetailed
 
+//* *************************************** 2020-11-20 권은비 종료 ****************************************
 
-
-//**************************************** 2020-11-20 권은비 종료 ****************************************
-
-
-
-
-///////////////////원래63기사원상세조회////////////////////////
+/// ////////////////원래63기사원상세조회////////////////////////
 // import React, { useEffect } from "react";
 // import {
 //   makeStyles,
@@ -94,7 +84,6 @@ export default EmpDetailed;
 //     PositionListRequest();
 //   }, [PositionListRequest]);
 
-
 //   return (
 //     <div>
 //       <Paper className={classes.paper}>
@@ -126,5 +115,3 @@ export default EmpDetailed;
 // };
 
 // export default EmpDetailed;
-
-

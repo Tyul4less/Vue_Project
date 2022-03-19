@@ -6,7 +6,7 @@
 
 </template>
 <script>
-import AddSlipForm from '@/../../../../../project/VueERP/src/components/account/account/Slip/AddSlipForm.vue'
+import AddSlipForm from '@/components/account/account/Slip/AddSlipForm.vue'
 
 export default {
   components: {

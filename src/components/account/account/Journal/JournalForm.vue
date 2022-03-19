@@ -2,24 +2,48 @@
   <div>
 
     <h1>전표</h1>
-    <b-button variant="relief-primary" @click="saveEditedForm" class="bt">저장</b-button>
-    <b-button variant="relief-primary" @click="editJouranDetail" class="bt">분개상세수정</b-button>
-    <b-button variant="relief-primary" @click="editJouranl" class="bt">분개수정</b-button>
-    <b-button variant="relief-primary" @click="editSlip" class="bt">전표수정</b-button>
+    <b-button
+      variant="relief-primary"
+      class="bt"
+      @click="saveEditedForm"
+    >
+      저장
+    </b-button>
+    <b-button
+      variant="relief-primary"
+      class="bt"
+      @click="editJouranDetail"
+    >
+      분개상세수정
+    </b-button>
+    <b-button
+      variant="relief-primary"
+      class="bt"
+      @click="editJouranl"
+    >
+      분개수정
+    </b-button>
+    <b-button
+      variant="relief-primary"
+      class="bt"
+      @click="editSlip"
+    >
+      전표수정
+    </b-button>
     <b-table
-        :items="GET_SELETED_SLIP"
-        :fields="slipFiled"
+      :items="GET_SELETED_SLIP"
+      :fields="slipFiled"
     />
     <h1>분개 </h1>
 
     <b-table
-        :items="GET_SELETED_JOURNALlIST"
-        :fields="journalFiled"
-        striped
-        responsive
-        select-mode="single"
-        selectable
-        @row-selected="onRowSelected"
+      :items="GET_SELETED_JOURNALlIST"
+      :fields="journalFiled"
+      striped
+      responsive
+      select-mode="single"
+      selectable
+      @row-selected="onRowSelected"
     >
 
       <template #cell(status)="data">
@@ -30,47 +54,47 @@
     </b-table>
     <h1>분개상세</h1>
     <b-table
-        :items="journalDetailList"
-        :fields="JournaldetailFiled"
+      :items="journalDetailList"
+      :fields="JournaldetailFiled"
     />
 
     <!-- 모달은 id 이용-->
     <!-- 전표추가 모달-->
     <!--하나의 inputForm 태그 사용 < 조건을 props로 내려줌>-->
     <b-modal
-        id="openEditSlipModal"
-        title="전표수정"
+      id="openEditSlipModal"
+      title="전표수정"
     >
       <p class="my-5">
         <InputForm
-            ref="inputSlipForm"
-            :edit-slip="GET_SELETED_SLIP"
-            modal-status="editSlip"
+          ref="inputSlipForm"
+          :edit-slip="GET_SELETED_SLIP"
+          modal-status="editSlip"
         />
       </p>
     </b-modal>
     <!-- 분개추가 모달 -->
     <b-modal
-        id="openEditJounalModal"
-        title="분개수정"
+      id="openEditJounalModal"
+      title="분개수정"
     >
       <p class="my-5">
         <InputForm
-            ref="inputJounalForm"
-            :edit-journal="editableJournal"
-            modal-status="editJournal"
+          ref="inputJounalForm"
+          :edit-journal="editableJournal"
+          modal-status="editJournal"
         />
       </p>
     </b-modal>
     <!--분개상세 모달 -->
     <b-modal
-        id="openEditJounalDetailModal"
-        title="분개상세수정"
+      id="openEditJounalDetailModal"
+      title="분개상세수정"
     >
       <p class="my-5">
         <InputForm
-            ref="inputJounalDetailForm"
-            modal-status="addJounalDetail"
+          ref="inputJounalDetailForm"
+          modal-status="addJounalDetail"
         />
       </p>
     </b-modal>

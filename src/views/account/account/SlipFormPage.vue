@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import SlipForm from '@/../../../../../project/VueERP/src/components/account/account/Slip/SlipForm.vue'
+import SlipForm from '@/components/account/account/Slip/SlipForm.vue'
 
 export default {
   components: {

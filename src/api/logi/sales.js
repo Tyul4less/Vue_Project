@@ -2,7 +2,6 @@
 
 import { logiApi } from '../index'
 
-
 // 조회
 function searchEstimateInfo(payload) {
   const {
@@ -11,7 +10,7 @@ function searchEstimateInfo(payload) {
     dateSearchCondition,
   } = payload
   return logiApi.get('/sales/searchEstimates', {
-    params : {
+    params: {
       startDate,
       endDate,
       dateSearchCondition,
