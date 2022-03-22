@@ -36,7 +36,7 @@
             variant="primary"
             size="md"
             class="mr-1"
-            @click="registEstimate"
+            @click="addNewContract"
           >
             등록
           </b-button>
@@ -45,7 +45,7 @@
 
     </div>
     <div
-      style="overflow-y: scroll"
+      style="overflow-y: scroll; max-height: 210px;"
       class="scrollStyle"
     >
       <b-table
@@ -261,7 +261,7 @@ import { onUnmounted } from '@vue/composition-api'
 import store from '@/store'
 import { mapState } from 'vuex'
 import CommonModal from '@/components/common/modal/CommonModal'
-import useInvoicesList from './gridOption'
+import useInvoicesList from '../../gridComponent/GridOption'
 
 export default {
   components: {
@@ -299,7 +299,9 @@ export default {
   },
   watch: {
     contractRequester() {
-      this.contractRequesterStatus = this.contractRequester > 0 ? true : null
+      if (this.contractRequester !== undefined && this.contractRequester !== '') {
+        this.contractRequesterStatus = true
+      } else { this.contractRequesterStatus = null }
     },
     contractTypeName() {
       console.log(this.contractTypeName)
@@ -374,10 +376,31 @@ export default {
     closeModal() {
       this.modal = false
     },
-    registEstimate() {
-      console.log('vue')
-      console.log(this.grid)
-      this.$store.commit('logi/sales/addNewContract')
+    addNewContract() {
+      const today = new Date()
+
+      const year = today.getFullYear()
+      const month = (`0${today.getMonth() + 1}`).slice(-2)
+      const day = (`0${today.getDate()}`).slice(-2)
+
+      const dateString = `${year}-${month}-${day}`
+
+      const param = [{
+        batchList: {
+          estimateNo: this.selected.estimateNo,
+          contractType: this.selected.contractTypeName,
+          contractRequester: this.selected.contractRequester,
+          customerCode: this.selected.customerCode,
+          description: this.selected.description,
+        },
+        editdueDateOfEstimate: {
+        },
+        contractDate: dateString,
+        personCodeInCharge: 'EMP-01',
+        estimateDetail: this.detailGrid,
+      }]
+      console.log(param)
+      this.$store.dispatch('logi/sales/addNewContract', param)
     },
   },
 
@@ -459,7 +482,7 @@ export default {
 </style>
 
 <style lang="scss">
-  @import '/src/@core/scss/vue/libs/vue-select';
+  @import '../../../../../@core/scss/vue/libs/vue-select';
   .scrollStyle::-webkit-scrollbar-track
   {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);

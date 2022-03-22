@@ -144,7 +144,7 @@ import vSelect from 'vue-select'
 import { onUnmounted } from '@vue/composition-api'
 import store from '@/store'
 import { mapState } from 'vuex'
-import useInvoicesList from './gridOption'
+import useInvoicesList from './GridOption'
 
 export default {
   components: {

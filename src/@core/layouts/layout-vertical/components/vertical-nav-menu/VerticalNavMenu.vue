@@ -30,9 +30,12 @@
                   alt="logo"
                 />
               </span>
-              <h2 class="brand-text">
+              <h2
+                class="brand-text"
+                style="font-family: '카페24 써라운드'"
+              >
                 6대원전자9
-<!--                {{ appName }}-->
+                <!--                {{ appName }}-->
               </h2>
             </b-link>
           </li>
@@ -73,7 +76,7 @@
       @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
     >
       <vertical-nav-menu-items
-              style="font-family: '배달의민족 도현'"
+        style="font-family: '배달의민족 도현'"
         :items="ERPMenu"
         class="navigation navigation-main"
       />

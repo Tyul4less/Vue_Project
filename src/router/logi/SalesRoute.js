@@ -1,19 +1,19 @@
 const ERP = '/logi'
 const salesRoute = [
   {
-    path: '/logi/sales/EstimateInfo',
+    path: `${ERP}/sales/EstimateInfo`,
     name: 'EstimateInfo',
     component: () => import('@/views/logistic/sales/Estimate/EstimateInfo.vue'),
   },
   {
-    path: '/logi/sales/EstimateRegiste',
+    path: `${ERP}/sales/EstimateRegiste`,
     name: 'EstimateRegiste',
     component: () => import('@/views/logistic/sales/Estimate/EstimateRegiste.vue'),
   },
   {
     path: `${ERP}/contractInfo`,
     name: 'contractInfo',
-    component: () => import('@/views/logistic/sales/contract/contractInfo'),
+    component: () => import('@/views/logistic/sales/contract/ContractInfo'),
     meta: {
       pageTitle: '수주 조회',
       breadcrumb: [
@@ -33,7 +33,7 @@ const salesRoute = [
   {
     path: `${ERP}/registContract`,
     name: 'registContract',
-    component: () => import('@/views/logistic/sales/contract/contractRegist'),
+    component: () => import('@/views/logistic/sales/contract/ContractRegist'),
     meta: {
       pageTitle: '수주 등록',
       breadcrumb: [
@@ -53,7 +53,7 @@ const salesRoute = [
   {
     path: `${ERP}/deliveryInfoPage`,
     name: 'deliveryInfoPage',
-    component: () => import('@/views/logistic/sales/deliveryInfo/deliveryInfoPage'),
+    component: () => import('@/views/logistic/sales/deliveryInfo/DeliveryInfoPage'),
     meta: {
       pageTitle: '수주 등록',
       breadcrumb: [

@@ -9,6 +9,7 @@ export default {
     detailGrid: [],
     tableColumns: [],
     detailTableColumns: [],
+    editEstimateDetail: [],
   },
   getters: {
   },

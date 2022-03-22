@@ -1,10 +1,10 @@
 export default {
-  
+
   SEARCH_INFO(state, estimateList) {
     state.estimateList = estimateList
-    console.log('뮤테이션'+JSON.stringify(state.estimateList))
+    console.log(`뮤테이션${JSON.stringify(state.estimateList)}`)
   },
-  
+
   searchContract(state, gridRow) {
     state.detailGrid = []
     state.grid = gridRow
@@ -20,10 +20,28 @@ export default {
     state.detailGrid = []
     state.grid = gridRow
   },
-  addNewContract(state) {
-    console.log(state.grid)
-  },
   searchEstimateDetailInfo(state, gridRow) {
     state.detailGrid = gridRow
+  },
+  setEditDueDate(state, dueDate) {
+    console.log(dueDate)
+    if (state.editEstimateDetail === '') {
+      state.editEstimateDetail = state.editEstimateDetail.concat(dueDate)
+    } else {
+      const isEmpty = state.editEstimateDetail.filter(e => {
+        if (e.estimateNo === dueDate.estimateNo) {
+          return e
+        }
+      })
+      if (isEmpty != null) {
+        console.log('isEmpty식별')
+        state.editEstimateDetail.filter(e => {
+          if (e.estimateNo === isEmpty.estimateNo) {
+            e.dueDateOfEstimate = isEmpty.dueDateOfEstimate
+          }
+        })
+      }
+    }
+    console.log(state.editEstimateDetail)
   },
 }

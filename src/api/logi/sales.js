@@ -46,6 +46,15 @@ function searchEstimateInContractAvailable(sendDate) {
     },
   })
 }
+function addNewContract(param) {
+  console.log(param)
+  return logiApi.post('/sales/addNewContract', {
+    batchList: param[0].batchList,
+    contractDate: param[0].contractDate,
+    personCodeInCharge: param[0].personCodeInCharge,
+    estimateDetail: param[0].estimateDetail,
+  })
+}
 function searchEstimateDetailInfo(estimateNo) {
   console.log(estimateNo)
   return logiApi.get('/sales/searchEstimateDetail', {
@@ -56,5 +65,5 @@ function searchEstimateDetailInfo(estimateNo) {
 }
 
 export {
-  searchEstimateInfo, searchContract, searchContractDetail, searchEstimateInContractAvailable, searchEstimateDetailInfo,
+  searchEstimateInfo, searchContract, searchContractDetail, searchEstimateInContractAvailable, searchEstimateDetailInfo, addNewContract,
 }

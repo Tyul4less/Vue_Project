@@ -1,6 +1,6 @@
 <template>
   <div>
-    <editableGrid>
+    <ContractRegistEditableGrid>
       <template v-slot:header>
         <h2
           class="mb-md-1"
@@ -71,12 +71,12 @@
         </b-button>
 
       </template>
-    </editableGrid>
-    <contract-detail-info-grid>
+    </ContractRegistEditableGrid>
+    <ContractRegistDetailEditableGrid>
       <template v-slot:header>
         <h2>수주상세</h2>
       </template>
-    </contract-detail-info-grid>
+    </ContractRegistDetailEditableGrid>
   </div>
 </template>
 
@@ -85,8 +85,8 @@ import {
   BCard, BRow, BCol, BFormInput, BButton, BTable, BMedia, BAvatar, BLink, BFormRadioGroup, BCardText,
   BBadge, BDropdown, BDropdownItem, BPagination, BTooltip, BFormDatepicker, BInputGroup, BInputGroupAppend,
 } from 'bootstrap-vue'
-import editableGrid from '@/components/logistic/sales/gridComponent/editableGrid'
-import contractDetailInfoGrid from '@/components/logistic/sales/contract/contractGrid/contractDetailGrid'
+import ContractRegistEditableGrid from '@/components/logistic/sales/contract/contractRegistGrid/ContractRegistEditableGrid'
+import ContractRegistDetailEditableGrid from '@/components/logistic/sales/contract/contractRegistGrid/ContractRegistDetailEditableGrid'
 import { mapActions, mapState } from 'vuex'
 
 export default {
@@ -111,8 +111,8 @@ export default {
     BFormRadioGroup,
     BCardText,
 
-    editableGrid,
-    contractDetailInfoGrid,
+    ContractRegistEditableGrid,
+    ContractRegistDetailEditableGrid,
   },
   computed: {
     ...mapState({
@@ -171,6 +171,7 @@ export default {
     searchEstimate() {
       const sendDate = { startDate: this.startDate, endDate: this.endDate }
       this.$store.dispatch('logi/sales/searchEstimateInContractAvailable', sendDate)
+      console.log()
     },
   },
 }

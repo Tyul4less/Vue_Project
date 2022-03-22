@@ -131,8 +131,8 @@ import {
   BBadge, BDropdown, BDropdownItem, BPagination, BTooltip, BFormDatepicker, BInputGroup, BInputGroupAppend,
 } from 'bootstrap-vue'
 import BEditableTable from 'bootstrap-vue-editable-table'
-import contractInfoGrid from '@/components/logistic/sales/contract/contractGrid/contractGrid'
-import contractDetailInfoGrid from '@/components/logistic/sales/contract/contractGrid/contractDetailGrid'
+import contractInfoGrid from '@/components/logistic/sales/contract/contractInfoGrid/ContractGrid'
+import contractDetailInfoGrid from '@/components/logistic/sales/contract/contractInfoGrid/ContractDetailGrid'
 import { mapActions, mapState } from 'vuex'
 
 export default {
