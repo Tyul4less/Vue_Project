@@ -1,4 +1,5 @@
-import router from '@/router/index'
+import sales from './sales/state'
+import production from './production/state'
 
 export default {
   namespaced: true,
@@ -7,6 +8,11 @@ export default {
   },
   getters: {
   },
+  actions: {
+  },
   mutations: {
+  },
+  modules: {
+    sales, production,
   },
 }

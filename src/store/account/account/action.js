@@ -1,4 +1,4 @@
-import { selectSlips, deleteSlip, selectSlip } from '@/api/account/account'
+import { deleteSlip, registerSlip, selectSlip, selectSlips, editSlip} from '../../../api/account/account'
 
 export default {
   // 전체조회
@@ -24,9 +24,25 @@ export default {
   // 삭제
   async DELETE_SLIP(_, slipList) { // 객체로 넘어오면 {}
     try {
-      const response = await deleteSlip(slipList)
+      return await deleteSlip(slipList)
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
 
-      return response
+  // 등록
+  async CREATE_SLIP(_, slip) { // 객체로 넘어오면 {}
+    try {
+      const response = await registerSlip(slip)
+
+      return response.data.newSlipNo
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
+  async EDIT_SLIP(_, slip) { // 객체로 넘어오면 {}
+    try {
+      return await editSlip(slip)
     } catch (err) {
       throw new Error(err)
     }

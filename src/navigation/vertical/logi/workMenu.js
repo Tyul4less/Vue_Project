@@ -9,4 +9,21 @@ export default [
     route: 'sals-tap',
     icon: 'FileIcon',
   },
+  {
+    title: '견적 관리',
+    route: 'Estimate',
+    icon: 'BoxIcon',
+    children: [
+      {
+        title: '견적 조회',
+        route: 'EstimateInfo',
+        icon: 'FileIcon',
+      },
+      {
+        title: '견적 등록',
+        route: 'EstimateRegiste',
+        icon: 'FileIcon',
+      },
+    ],
+  },
 ]

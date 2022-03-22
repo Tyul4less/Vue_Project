@@ -1,6 +1,10 @@
 import Vue from 'vue'
-import { ToastPlugin, ModalPlugin } from 'bootstrap-vue'
+import {
+  ToastPlugin, ModalPlugin,
+} from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
+
+import Vuex from 'vuex'
 
 import router from './router'
 import store from './store'
@@ -21,6 +25,9 @@ import { formatDate } from './utils/filters'
 Vue.use(ToastPlugin)
 Vue.use(ModalPlugin)
 
+Vue.use(ToastPlugin) // alert창
+Vue.use(ModalPlugin) // 모달
+
 // Composition API
 Vue.use(VueCompositionAPI)
 // 필터등록
@@ -36,5 +43,6 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  Vuex,
   render: h => h(App),
 }).$mount('#app')

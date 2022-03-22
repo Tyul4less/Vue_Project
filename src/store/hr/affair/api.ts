@@ -1,17 +1,13 @@
-import Vue from 'vue';
-import Vuex, {StoreOptions} from 'vuex';
-import './action';
+import {EmpList} from './state'
+import {GetterTree} from "vuex";
 
-Vue.use(Vuex);
-
-interface Api {
-    hrEmpList : Array<Object>;
-}
-
-const store: StoreOptions<Api> = {
-    state : {
-        hrEmpList : []
+const getters: GetterTree<EmpList, Object> = {
+    GETTER_ALL_EMP_LIST(state: EmpList): Object{
+        return state.allEmpList;
+    },
+    GETTER_EMP_DETAIL(state: EmpList): Object{
+        return state.empDetail;
     }
-}
+};
 
-export default new Vuex.Store(store)
+export default getters
