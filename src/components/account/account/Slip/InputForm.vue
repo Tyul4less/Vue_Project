@@ -204,16 +204,16 @@
             label-for="balanceDivision"
           >
             <b-form-select
-                v-if="modalStatus==='addJounal'"
+              v-if="modalStatus==='addJounal'"
               id="balanceDivision"
               v-model="journalForm.balanceDivision"
               :options="options"
             />
             <b-form-select
               v-else
-                id="balanceDivision"
-                v-model="editJournal.balanceDivision"
-                :options="options"
+              id="balanceDivision"
+              v-model="editJournal.balanceDivision"
+              :options="options"
             />
 
           </b-form-group>
@@ -223,17 +223,17 @@
             label="거래처코드"
             label-for="customerCode"
           >
-        <b-form-input
-            v-if="modalStatus==='addJounal'"
-                id="customerCode"
-                v-model="journalForm.customerCode"
-                @click="openAccountCustomerModal('accountCustomer')"
-              />
             <b-form-input
-                v-else
-                id="customerCode"
-                v-model="editJournal.customerCode"
-                @click="openAccountCustomerModal('accountCustomer')"
+              v-if="modalStatus==='addJounal'"
+              id="customerCode"
+              v-model="journalForm.customerCode"
+              @click="openAccountCustomerModal('accountCustomer')"
+            />
+            <b-form-input
+              v-else
+              id="customerCode"
+              v-model="editJournal.customerCode"
+              @click="openAccountCustomerModal('accountCustomer')"
             />
 
           </b-form-group>
@@ -244,17 +244,17 @@
             label="차변"
           >
 
-              <b-form-input
-                  v-if="modalStatus==='addJounal'"
-                id="leftDebtorPrice"
-                v-model="journalForm.leftDebtorPrice"
-                :disabled="journalForm.balanceDivision==='대변'"
-              />
+            <b-form-input
+              v-if="modalStatus==='addJounal'"
+              id="leftDebtorPrice"
+              v-model="journalForm.leftDebtorPrice"
+              :disabled="journalForm.balanceDivision==='대변'"
+            />
             <b-form-input
               v-else
-                id="leftDebtorPrice"
-                v-model="editJournal.leftDebtorPrice"
-                :disabled="editJournal.balanceDivision==='대변'"
+              id="leftDebtorPrice"
+              v-model="editJournal.leftDebtorPrice"
+              :disabled="editJournal.balanceDivision==='대변'"
             />
 
           </b-form-group>
@@ -265,17 +265,17 @@
             label="대변"
           >
 
-              <b-form-input
-                  v-if="modalStatus==='addJounal'"
-                id="rightCreditsPrice"
-                v-model="journalForm.rightCreditsPrice"
-                :disabled="journalForm.balanceDivision==='차변'"
-              />
             <b-form-input
-                v-else
-                id="rightCreditsPrice"
-                v-model="editJournal.rightCreditsPrice"
-                :disabled="editJournal.balanceDivision==='차변'"
+              v-if="modalStatus==='addJounal'"
+              id="rightCreditsPrice"
+              v-model="journalForm.rightCreditsPrice"
+              :disabled="journalForm.balanceDivision==='차변'"
+            />
+            <b-form-input
+              v-else
+              id="rightCreditsPrice"
+              v-model="editJournal.rightCreditsPrice"
+              :disabled="editJournal.balanceDivision==='차변'"
             />
 
           </b-form-group>
@@ -484,7 +484,7 @@ export default {
   methods: {
     // 계정코드 and 계정명 모달
     openAccountCodeModal(name) {
-      console.log(name)
+
       if (name === 'accountName') {
         this.searchCondition = 'accountName'
       } else {
@@ -539,7 +539,6 @@ export default {
      */
     searchControlCode(selectedItem) {
       const { accountControlType, accountControlName } = selectedItem[0]
-
       this.journalDetailForm.accountControlType = accountControlType
       this.journalDetailForm.accountControlName = accountControlName
     },

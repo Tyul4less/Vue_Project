@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.mutations = void 0;
-exports.mutations = {
+export const mutations = {
     SET_SEARCH_CONTRACT_DETAIL_IN_MPS_AVAILABLE(state, contractDetail) {
         state.contractDetailList = contractDetail;
     },
@@ -16,4 +13,4 @@ exports.mutations = {
         }
     },
 };
-exports.default = exports.mutations;
+export default mutations;

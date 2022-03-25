@@ -1,4 +1,10 @@
-import { fetchAccountCode, fetchAccountCustomerCode, fetchAccountControllCode } from '../../../api/account/base'
+import {
+  fetchAccountCode,
+  fetchAccountCustomerCode,
+  fetchAccountControllCode,
+  fetchAccountLedger,
+  fetchGeneralAccountLedger,
+} from '@/api/account/base'
 
 export default {
   // 해당 계정과목 찾기
@@ -30,6 +36,32 @@ export default {
       console.log(data)
       commit('SET_ACCOUNT_CONTROLL_CODE_LIST', data.accountControllCodeList)
       return data
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
+  /**
+     * 계정별원장
+     */
+  async FETCH_ACCOUNT_LEDGER({ commit }, searchData) {
+    try {
+      const response = await fetchAccountLedger(searchData)
+      console.log(response)
+      commit('SET_ACCOUNT_LEDGER_LIST', response.data.accountLederList)
+      return response
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
+  /**
+     * 총계정원장
+     */
+  async FETCH_GENERAL_ACCOUNT_LEDGER({ commit }, searchData) {
+    try {
+      const response = await fetchGeneralAccountLedger(searchData)
+      console.log(response)
+      commit('SET_GENERAL_ACCOUNT_LEDGER', response.data)
+      return response
     } catch (err) {
       throw new Error(err)
     }

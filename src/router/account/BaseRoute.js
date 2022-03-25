@@ -1,8 +1,8 @@
 import AccountRoute from './AccountRoute'
+import StatementRoute from './StatementRoute'
 
 const ERP = '/account'
 const accountRouter = [
-  ...AccountRoute,
 
   {
     path: `${ERP}/home`,
@@ -32,5 +32,29 @@ const accountRouter = [
       ],
     },
   },
+  // 계정별 원장
+  {
+    path: '/acc/base/accountLedger',
+    name: 'accountLedger',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('@/views/account/base/AccountLedgerPage.vue'),
+  },
+  // 총계정원장
+  {
+    path: '/acc/base/generalAccountLedger',
+    name: 'generalAccountLedger',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('@/views/account/base/GeneralAccountLedgerPage.vue'),
+  },
+  // 계정과목관리
+  {
+    path: '/acc/base/accountCodeManager',
+    name: 'accountCodeManager',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('@/views/account/base/AccountCodeManagerPage.vue'),
+  },
+
+  ...AccountRoute,
+  ...StatementRoute,
 ]
 export default accountRouter
