@@ -23,5 +23,23 @@ export default {
   CLEAR_ACCOUNT_CONTROLL_CODE_LIST(state) {
     state.accountControllCodeList = []
   },
+  /**
+   * 계정별원장
+   */
+  SET_ACCOUNT_LEDGER_LIST(state, accountLederList) {
+    state.accountLederList = accountLederList
+  },
+  CLEAR_ACCOUNT_LEDGER_LIST(state) {
+    state.accountLederList = []
+  },
+  /**
+   * 총계정원장
+   */
+  SET_GENERAL_ACCOUNT_LEDGER(state, generalAccountLedgerList) {
+    state.generalAccountLedgerList = generalAccountLedgerList
+  },
+  CLEAR_GENERAL_ACCOUNT_LEDGER(state) {
+    state.generalAccountLedgerList = []
+  },
 
 }

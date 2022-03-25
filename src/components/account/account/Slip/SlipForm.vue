@@ -157,10 +157,10 @@ import MenuSlipForm from '@/components/account/account/Slip/MenuSlipForm.vue'
 import {
   BAvatar, BPagination, BFormGroup, BFormInput, BFormSelect, BRow, BCol,
 } from 'bootstrap-vue'
-import ToastificationContent from '@/@core/components/toastification/ToastificationContent.vue'
 import { VueGoodTable } from 'vue-good-table'
 import { mapActions, mapState } from 'vuex'
 import Vue from 'vue'
+import ToastificationContent from '../../../../../../../VueERP-dev/src/@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
@@ -218,10 +218,10 @@ export default {
     ...mapState('account/account', ['slipFormList']),
 
   },
+  /**
+   * 리엑트의 useEffect와 같음
+   */
   created() {
-    /**
-     * 리엑트의 useEffect와 같음
-     */
     this.FETCH_ALL_SLIP()
   },
   methods: {

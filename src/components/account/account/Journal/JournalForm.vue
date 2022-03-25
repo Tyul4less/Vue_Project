@@ -178,11 +178,10 @@ export default {
     /**
      * 수정 후 저장
      */
-    saveEditedForm() {
-      console.log(123)
+    async saveEditedForm() {
       const editedSlip = this.GET_SELETED_SLIP[0]
-      console.log(editedSlip)
-      this.EDIT_SLIP(editedSlip)
+      const updateSlipNo = await this.EDIT_SLIP(editedSlip)
+      alert(`${updateSlipNo} 전표의 모든 사항이 업데이트되었습니다`)
     },
   },
 

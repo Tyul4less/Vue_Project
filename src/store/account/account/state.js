@@ -6,6 +6,7 @@ export default {
   state: {
     slipFormList: [],
     slipForm: {},
+    journalList: [],
   },
   getters: {
     GET_SELETED_SLIP(state) {

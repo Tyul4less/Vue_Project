@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,14 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-ignore
-const production_1 = require("@/api/logi/production");
+import { searchContractDetailInMpsAvailable, convertContractDetailToMps } from '@/api/logi/production';
 const actions = {
     SEARCH_CONTRACT_DETAIL_IN_MPS_AVAILABLE(state, payload) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { data } = yield (0, production_1.searchContractDetailInMpsAvailable)(payload);
+                const { data } = yield searchContractDetailInMpsAvailable(payload);
                 state.commit('SET_SEARCH_CONTRACT_DETAIL_IN_MPS_AVAILABLE', data.result.data.gridRowJson);
                 return data;
             }
@@ -32,7 +30,7 @@ const actions = {
     CONVERT_CONTRACT_DETAIL_TO_MPS({ commit }, payload) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { data } = yield (0, production_1.convertContractDetailToMps)(payload);
+                const { data } = yield convertContractDetailToMps(payload);
                 commit('SET_CONTRACT_DETAIL_LIST', data.result.data.gridRowJson[0]);
                 return data;
             }
@@ -45,4 +43,4 @@ const actions = {
         });
     },
 };
-exports.default = actions;
+export default actions;

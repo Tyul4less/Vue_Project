@@ -59,7 +59,7 @@ export default {
     },
     // 테이블 선택한 아이템 가져오기
     onRowSelected(selectedItem) {
-      console.log(selectedItem)
+      console.log(selectedItem1)
       this.$emit('input', selectedItem)
     },
   },
